@@ -1,3 +1,19 @@
+"""
+ --config-file configs/Unified_learned_OCIM_RS200_6x+2x.yaml
+ --input "../../../../data/t2i_out/sd_v1/samples/*"
+ --output "../../../../data/metrics/det/unified_det"
+ --opts MODEL.WEIGHTS "../../../../weights/unified_det/Unified_learned_OCIM_RS200_6x+2x.pth"
+"""
+"""
+--config-file configs/Unified_learned_OCIM_R50_6x+2x.yaml --input images/*.jpg 
+--opts MODEL.WEIGHTS ../../../../weights/unified_det/Unified_learned_OCIM_R50_6x+2x.pth
+"""
+"""
+--config-file configs/Unified_learned_OCIM_RS200_6x+2x.yaml 
+--input "../../../../data/t2i_out/sd_v2/vanilla_counting/*" 
+--output "../../../../data/metrics/det/unified_det" 
+--opts MODEL.WEIGHTS "../../../../weights/unified_det/Unified_learned_OCIM_RS200_6x+2x.pth"
+"""
 # Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved
 import argparse
 import glob
@@ -7,6 +23,12 @@ import time
 import cv2
 import sys
 import tqdm
+import csv
+import numpy as np
+import json
+import codecs
+import pickle
+import pandas as pd
 
 from detectron2.config import get_cfg
 from detectron2.data.detection_utils import read_image
@@ -15,16 +37,7 @@ from detectron2.utils.logger import setup_logger
 from unidet.predictor import UnifiedVisualizationDemo
 from unidet.config import add_unidet_config
 
-"""
- --config-file configs/Unified_learned_OCIM_RS200_6x+2x.yaml
- --input "../../../../data/t2i_out/sd_v1/samples/*"
- --output "../../../../data/unified_det"
- --opts MODEL.WEIGHTS "../../../../weights/unified_det/Unified_learned_OCIM_RS200_6x+2x.pth"
-"""
-"""
---config-file configs/Unified_learned_OCIM_R50_6x+2x.yaml --input images/*.jpg 
---opts MODEL.WEIGHTS ../../../../weights/unified_det/Unified_learned_OCIM_R50_6x+2x.pth
-"""
+
 # constants
 WINDOW_NAME = "Unified detections"
 
@@ -92,6 +105,7 @@ if __name__ == "__main__":
     demo = UnifiedVisualizationDemo(cfg)
 
     if args.input:
+        output_lst_dict = {}
         if len(args.input) == 1:
             args.input = glob.glob(os.path.expanduser(args.input[0]))
             assert args.input, "The input path(s) was not found"
@@ -100,8 +114,31 @@ if __name__ == "__main__":
             img = read_image(path, format="BGR")
             start_time = time.time()
             predictions, visualized_output = demo.run_on_image(img)
-            demo.metadata.thing_classes
-            print(predictions['instances'].pred_classes.cpu().numpy())  # [148 383 134  15 620 452]
+            print()
+            pred_objs_cord = predictions['instances'].pred_boxes.tensor.cpu().numpy()
+            pred_objs_cls_name = np.array([demo.metadata.thing_classes[cls_id] for cls_id in predictions['instances'].pred_classes.cpu().numpy()])
+            pred_objs_cls_name = np.reshape(pred_objs_cls_name, (-1, 1))
+            pred_objs = np.hstack((pred_objs_cord, pred_objs_cls_name))
+            if len(pred_objs) > 0:  # handle the case of empty predictions
+                # Remove repeated cord
+                pred_filtered = {0: [pred_objs[0]]}
+                for idx in range(pred_objs.shape[0]):
+                    found = False
+                    for k, v in pred_filtered.items():
+                        if (pred_objs[idx][0:4].astype(float).astype(int) == v[0][0:4].astype(float).astype(int)).all():
+                            found = True
+                            pred_filtered[k].append(pred_objs[idx])
+                            break
+                    if found == False:
+                        pred_filtered[idx] = [pred_objs[idx]]
+            else:
+                pred_filtered = {0: [[0, 0, 0, 0, ""]]}
+
+            img_name = path.split("/")[-1].split(".")[0]
+            iter_idx = int(img_name.split("_")[1])
+            if not(iter_idx in output_lst_dict.keys()):
+                output_lst_dict[iter_idx] = {}
+            output_lst_dict[iter_idx][int(img_name.split("_")[0])] = pred_filtered
             logger.info(
                 "{}: {} in {:.2f}s".format(
                     path,
@@ -125,6 +162,10 @@ if __name__ == "__main__":
                 cv2.imshow(WINDOW_NAME, visualized_output.get_image()[:, :, ::-1])
                 if cv2.waitKey(0) == 27:
                     break  # esc to quit
+
+        with open('../unidet_pred_vanilla_counting.pkl', 'wb') as f:
+            pickle.dump(output_lst_dict, f)
+
     elif args.webcam:
         assert args.input is None, "Cannot have both --input and --webcam!"
         assert args.output is None, "output not yet supported with --webcam!"
