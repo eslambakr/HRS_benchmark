@@ -232,6 +232,18 @@ def main():
         choices=["full", "autocast"],
         default="autocast"
     )
+    parser.add_argument(
+        "--cuda_idx",
+        type=int,
+        default=0,
+        help="determine which GPU we have to use",
+    )
+    parser.add_argument(
+        "--saving_folder",
+        type=str,
+        default="samples",
+        help="determine the name of the inner folder to save images",
+    )
     opt = parser.parse_args()
 
     if opt.laion400m:
@@ -245,7 +257,7 @@ def main():
     config = OmegaConf.load(f"{opt.config}")
     model = load_model_from_config(config, f"{opt.ckpt}")
 
-    device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
+    device = torch.device(f'cuda:{opt.cuda_idx}') if torch.cuda.is_available() else torch.device("cpu")
     model = model.to(device)
 
     if opt.dpm_solver:
@@ -276,7 +288,7 @@ def main():
             data = f.read().splitlines()
             data = list(chunk(data, batch_size))
 
-    sample_path = os.path.join(outpath, "samples")
+    sample_path = os.path.join(outpath, opt.saving_folder)
     os.makedirs(sample_path, exist_ok=True)
     base_count = len(os.listdir(sample_path))
     grid_count = len(os.listdir(outpath)) - 1
@@ -323,7 +335,7 @@ def main():
                                 x_sample = 255. * rearrange(x_sample.cpu().numpy(), 'c h w -> h w c')
                                 img = Image.fromarray(x_sample.astype(np.uint8))
                                 img = put_watermark(img, wm_encoder)
-                                img.save(os.path.join(sample_path, f"{base_count:05}.png"))
+                                img.save(os.path.join(sample_path, f"{(base_count%(len(data)*batch_size)):05}_{n:02}.png"))
                                 base_count += 1
 
                         if not opt.skip_grid:

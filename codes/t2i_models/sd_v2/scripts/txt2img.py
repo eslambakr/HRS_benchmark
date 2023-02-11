@@ -171,6 +171,23 @@ def parse_args():
         default=1,
         help="repeat each prompt in file this often",
     )
+    parser.add_argument(
+        "--cuda_idx",
+        type=int,
+        default=0,
+        help="determine which GPU we have to use",
+    )
+    parser.add_argument(
+        "--skip_grid",
+        action='store_true',
+        help="do not save a grid, only individual samples. Helpful when evaluating lots of samples",
+    )
+    parser.add_argument(
+        "--saving_folder",
+        type=str,
+        default="samples",
+        help="determine the name of the inner folder to save images",
+    )
     opt = parser.parse_args()
     return opt
 
@@ -189,7 +206,7 @@ def main(opt):
     config = OmegaConf.load(f"{opt.config}")
     model = load_model_from_config(config, f"{opt.ckpt}")
 
-    device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
+    device = torch.device(f'cuda:{opt.cuda_idx}') if torch.cuda.is_available() else torch.device("cpu")
     model = model.to(device)
 
     if opt.plms:
@@ -221,7 +238,7 @@ def main(opt):
             data = [p for p in data for i in range(opt.repeat)]
             data = list(chunk(data, batch_size))
 
-    sample_path = os.path.join(outpath, "samples")
+    sample_path = os.path.join(outpath, opt.saving_folder)
     os.makedirs(sample_path, exist_ok=True)
     sample_count = 0
     base_count = len(os.listdir(sample_path))
@@ -262,23 +279,24 @@ def main(opt):
                         x_sample = 255. * rearrange(x_sample.cpu().numpy(), 'c h w -> h w c')
                         img = Image.fromarray(x_sample.astype(np.uint8))
                         img = put_watermark(img, wm_encoder)
-                        img.save(os.path.join(sample_path, f"{base_count:05}.png"))
+                        img.save(os.path.join(sample_path, f"{(base_count % (len(data) * batch_size)):05}_{n:02}.png"))
                         base_count += 1
                         sample_count += 1
 
                     all_samples.append(x_samples)
 
-            # additionally, save as grid
-            grid = torch.stack(all_samples, 0)
-            grid = rearrange(grid, 'n b c h w -> (n b) c h w')
-            grid = make_grid(grid, nrow=n_rows)
+            if not opt.skip_grid:
+                # additionally, save as grid
+                grid = torch.stack(all_samples, 0)
+                grid = rearrange(grid, 'n b c h w -> (n b) c h w')
+                grid = make_grid(grid, nrow=n_rows)
 
-            # to image
-            grid = 255. * rearrange(grid, 'c h w -> h w c').cpu().numpy()
-            grid = Image.fromarray(grid.astype(np.uint8))
-            grid = put_watermark(grid, wm_encoder)
-            grid.save(os.path.join(outpath, f'grid-{grid_count:04}.png'))
-            grid_count += 1
+                # to image
+                grid = 255. * rearrange(grid, 'c h w -> h w c').cpu().numpy()
+                grid = Image.fromarray(grid.astype(np.uint8))
+                grid = put_watermark(grid, wm_encoder)
+                grid.save(os.path.join(outpath, f'grid-{grid_count:04}.png'))
+                grid_count += 1
 
     print(f"Your samples are ready and waiting for you here: \n{outpath} \n"
           f" \nEnjoy.")

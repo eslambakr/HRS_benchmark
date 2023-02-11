@@ -69,4 +69,4 @@ model:
     cond_stage_config:
       target: ldm.modules.encoders.modules.FrozenCLIPEmbedder
       params:
-        device: "cuda:0"
+        device: "cuda:2"
