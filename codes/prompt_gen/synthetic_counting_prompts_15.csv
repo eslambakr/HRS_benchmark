@@ -1,0 +1,16 @@
+meta_prompt,vanilla_prompt,n1,obj1,n2,obj2,synthetic_prompt
+"In one sentence, Describe a real scene about 1 bicycle.",1 bicycle,1,bicycle,0,,"a young boy is riding his bicycle down a sunny street, the wind blowing through his hair."
+"In one sentence, Describe a real scene about 1 dining table.",1 dining table,1,dining table,0,,"a family of four is gathered around a dining table, laughing and enjoying a home-cooked meal."
+"In one sentence, Describe a real scene about 1 remote.",1 remote,1,remote,0,,"a person is sitting on their couch, typing away on their laptop while their tv is connected to the internet via a remote."
+"In one sentence, Describe a real scene about 1 zebra.",1 zebra,1,zebra,0,,"a single zebra stands in the tall grass of the african savanna, its black and white stripes standing out against the bright green landscape."
+"In one sentence, Describe a real scene about 2 knife.",2 knife,2,knife,0,,"two people are holding knives, facing each other in a tense standoff."
+"In one sentence, Describe a real scene about 3 bicycle and 3 snowboard.",3 bicycle and 3 snowboard,3,bicycle,3,snowboard,three people riding bicycles and three people snowboarding around a snowy mountain path in the winter.
+"In one sentence, Describe a real scene about 3 wine glass and 2 fire hydrant.",3 wine glass and 2 fire hydrant,3,wine glass,2,fire hydrant,"three wine glasses are sitting on a sidewalk near two fire hydrants, their colors reflecting off the bright red of the hydrants."
+"In one sentence, Describe a real scene about 2 cat and 2 chair.",2 cat and 2 chair,2,cat,2,chair,"two cats are sitting on two chairs, with one cat on each chair."
+"In one sentence, Describe a real scene about 2 horse and 2 book.",2 horse and 2 book,2,horse,2,book,"two horses are standing in a field near a tree, with two books lying open on the grass beneath it."
+"In one sentence, Describe a real scene about 3 tie and 3 giraffe.",3 tie and 3 giraffe,3,tie,3,giraffe,"three giraffes are standing in a field, their long necks intertwined with each other's, and three ties are hanging from a nearby tree, swaying in the breeze."
+"In one sentence, Describe a real scene about 4 bird and 5 vase.",4 bird and 5 vase,4,bird,5,vase,four birds are perched atop five colorful vases arranged in a line.
+"In one sentence, Describe a real scene about 5 cell phone and 5 carrot.",5 cell phone and 5 carrot,5,cell phone,5,carrot,"five people are sitting around a table, each with a cell phone in their hands, and a carrot in front of them."
+"In one sentence, Describe a real scene about 5 sandwich and 4 sheep.",5 sandwich and 4 sheep,5,sandwich,4,sheep,"five sandwiches are sitting on a picnic blanket in a meadow, with four sheep grazing nearby."
+"In one sentence, Describe a real scene about 4 horse and 4 zebra.",4 horse and 4 zebra,4,horse,4,zebra,"four horses and four zebras are standing in a grassy field, their coats shining in the golden sunlight."
+"In one sentence, Describe a real scene about 4 surfboard and 4 sports ball.",4 surfboard and 4 sports ball,4,surfboard,4,sports ball,"four surfboards and four sports balls are lying on the beach, glistening in the sun."

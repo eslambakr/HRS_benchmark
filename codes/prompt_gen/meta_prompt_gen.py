@@ -18,11 +18,36 @@ class MetaPromptGen:
         self.styles = [["animation", "real", "sketch"], ["sunny", "cloudy", "rainy"], ["colored", "black and white"],
                        ["morning", "night"]]
         self.scenarios_objs_map = ScenariosObjsMapping(ann_path=ann_path, label_space_path=label_space_path)
+        self.data_type = "unidet"  # ["coco", "unidet"]
 
         # Read Places365:
         places365 = open("places365.txt", "r")
         places365 = places365.readlines()
         self.places365 = [place.split('/')[2].split(" ")[0] for place in places365]
+
+        # Read COCO:
+        coco_classes = open("coco.txt", "r")
+        coco_classes = coco_classes.readlines()
+        self.coco_classes = [obj.strip('\n') for obj in coco_classes]
+
+    def _select_rand_objs(self, num):
+        objs = []
+        for i in range(num):
+            if self.data_type:
+                obj = self._select_rand_obj_coco()
+            else:
+                obj = self._select_rand_obj()
+
+            # check that there is no repeated objects:
+            if objs:
+                while obj in objs:
+                    if self.data_type:
+                        obj = self._select_rand_obj_coco()
+                    else:
+                        obj = self._select_rand_obj()
+
+            objs.append(obj)
+        return objs
 
     def _select_rand_obj(self):
         selected_scenario_objs = self.scenarios_objs_map.unidet_scenario_obj_map[random.choice(self.possible_scenarios)]
@@ -30,47 +55,56 @@ class MetaPromptGen:
         # check if it is valid object or not:
         if "--" in obj:
             obj = self._select_rand_obj()
+
         return obj
 
-    def _select_rand_style(self):
-        style = random.choice(random.choice(self.styles))
-        return style
+    def _select_rand_obj_coco(self):
+        return random.choice(self.coco_classes)
+
+    def _select_rand_style(self, num):
+        sampled_styles = np.random.choice(a=self.styles, size=num, replace=False)
+        return [random.choice(style) for style in sampled_styles]
 
     def select_rand_place(self):
-        place = random.choice(random.choice(self.places365))
+        place = random.choice(self.places365).replace("_", " ")
         return place
 
     def _counting_gen(self):
         style = "real"
+        self.data_type = "coco"  # ["coco", "unidet"]
         self.possible_scenarios = ["animals", "transportation", "home devices", "cleaning tools", "maintenance tools",
                                    "cooking tools", "furniture", "wild life", "toys", "musical instruments", "clothes",
                                    "military", "signs", "autonomous driving", "movie", "fashion", "teaching", "sports"]
+        n1, n2 = 0, 0
+        obj1, obj2 = None, None
         if self.level == "easy":
-            possible_instances = np.random.random_integers(low=1, high=2)  # [1, 2]
-            obj1 = self._select_rand_obj()
-            counting_template = "Describe a {style} scene about {N1} {obj1}.".format(style=style,
-                                                                                     N1=possible_instances,
-                                                                                     obj1=obj1)
+            n1 = np.random.random_integers(low=1, high=2)  # [1, 2]
+            obj1 = self._select_rand_objs(num=1)[0]
+            counting_template = "Describe a {style} scene about {N1} {obj1}.".format(style=style, N1=n1, obj1=obj1)
+            vanilla_template = "{N1} {obj1}".format(N1=n1, obj1=obj1)
         elif self.level == "medium":
             n1 = np.random.random_integers(low=2, high=3)  # [2, 3]
             n2 = np.random.random_integers(low=2, high=3)  # [2, 3]
-            obj1 = self._select_rand_obj()
-            obj2 = self._select_rand_obj()
+            objs = self._select_rand_objs(num=2)
+            obj1, obj2 = objs
             counting_template = "Describe a {style} scene about {N1} {obj1} and {N2} {obj2}.".format(style=style,
                                                                                                      N1=n1, obj1=obj1,
                                                                                                      N2=n2, obj2=obj2)
+            vanilla_template = "{N1} {obj1} and {N2} {obj2}".format(N1=n1, obj1=obj1, N2=n2, obj2=obj2)
         elif self.level == "hard":
             n1 = np.random.random_integers(low=4, high=5)  # [3, 4]
             n2 = np.random.random_integers(low=4, high=5)  # [3, 4]
-            obj1 = self._select_rand_obj()
-            obj2 = self._select_rand_obj()
+            objs = self._select_rand_objs(num=2)
+            obj1, obj2 = objs
             counting_template = "Describe a {style} scene about {N1} {obj1} and {N2} {obj2}.".format(style=style,
                                                                                                      N1=n1, obj1=obj1,
                                                                                                      N2=n2, obj2=obj2)
+            vanilla_template = "{N1} {obj1} and {N2} {obj2}".format(N1=n1, obj1=obj1, N2=n2, obj2=obj2)
         else:
             raise Exception("Sorry, the selected level is not implemented, the only implemented options are ",
                             self.levels)
-        return "In one sentence, " + counting_template
+        return {"meta_prompt": "In one sentence, " + counting_template, "vanilla_prompt": vanilla_template,
+                "n1": n1, "obj1": obj1, "n2": n2, "obj2": obj2}
 
     def _fidelity_gen(self):
         self.possible_scenarios = []
@@ -78,25 +112,27 @@ class MetaPromptGen:
             if v:
                 self.possible_scenarios.append(k)
         if self.level == "easy":
-            obj1 = self._select_rand_obj()
-            style = self._select_rand_style()
+            n1 = 1
+            obj1 = self._select_rand_objs(num=1)[0]
+            style = self._select_rand_style(num=1)[0]
             template = "Describe a {style} scene about {obj1}.".format(style=style, obj1=obj1)
         elif self.level == "medium":
-            obj1 = self._select_rand_obj()
-            obj2 = self._select_rand_obj()
-            style1 = self._select_rand_style()
-            style2 = self._select_rand_style()
+            n1 = np.random.random_integers(low=1, high=2)  # [1, 2]
+            n2 = np.random.random_integers(low=1, high=2)  # [1, 2]
+            objs = self._select_rand_objs(num=2)
+            obj1, obj2 = objs
+            style1, style2 = self._select_rand_style(num=2)
             template = "Describe a {style1} {style2} scene about {obj1} and {obj2}.".format(style1=style1,
                                                                                             style2=style2,
                                                                                             obj1=obj1,
                                                                                             obj2=obj2)
         elif self.level == "hard":
-            style1 = self._select_rand_style()
-            style2 = self._select_rand_style()
-            style3 = self._select_rand_style()
-            obj1 = self._select_rand_obj()
-            obj2 = self._select_rand_obj()
-            obj3 = self._select_rand_obj()
+            n1 = np.random.random_integers(low=1, high=2)  # [1, 2]
+            n2 = np.random.random_integers(low=1, high=2)  # [1, 2]
+            n3 = np.random.random_integers(low=1, high=2)  # [1, 2]
+            style1, style2, style3 = self._select_rand_style(num=3)
+            objs = self._select_rand_objs(num=3)
+            obj1, obj2, obj3 = objs
             template = "Describe a {style1} {style2} {style3} scene about {obj1}, {obj2} and {obj3}.".format(
                 style1=style1, style2=style2, style3=style3, obj1=obj1, obj2=obj2, obj3=obj3)
         else:
@@ -106,31 +142,30 @@ class MetaPromptGen:
 
     def _writing_gen(self):
         self.possible_scenarios = []
+        obj1, obj2, n1 = None, None, 0
         for k, v in self.scenarios_objs_map.unidet_scenario_obj_map.items():
             if v:
                 self.possible_scenarios.append(k)
 
         if self.level == "easy":
-            obj1 = self._select_rand_obj()
+            objs = self._select_rand_objs(num=1)
             n1 = np.random.random_integers(low=1, high=3)  # [1, 3]
             template = "{N1} words about {obj1}, the {N1} words should be between double quotes.".format(
-                obj1=obj1, N1=n1)
+                obj1=objs[0], N1=n1)
         elif self.level == "medium":
-            obj1 = self._select_rand_obj()
-            obj2 = self._select_rand_obj()
+            objs = self._select_rand_objs(num=2)
             n1 = np.random.random_integers(low=4, high=6)  # [4, 6]
             template = "{N1} words about {obj1} and {obj2}, the {N1} words should be between double quotes.".format(
-                obj1=obj1, obj2=obj2, N1=n1)
+                obj1=objs[0], obj2=objs[1], N1=n1)
         elif self.level == "hard":
-            obj1 = self._select_rand_obj()
-            obj2 = self._select_rand_obj()
+            objs = self._select_rand_objs(num=2)
             n1 = np.random.random_integers(low=6, high=8)  # [6, 8]
             template = "{N1} words about {obj1} and {obj2}, the {N1} words should be between double quotes.".format(
-                obj1=obj1, obj2=obj2, N1=n1)
+                obj1=objs[0], obj2=objs[1], N1=n1)
         else:
             raise Exception("Sorry, the selected level is not implemented, the only implemented options are ",
                             self.levels)
-        return "one sentence of " + template
+        return {"meta_prompt": "one sentence of " + template, "n1": n1, "obj1": obj1, "obj2": obj2}
 
     def gen_meta_prompts(self, level_id, skill):
         self.level = self.levels[level_id]

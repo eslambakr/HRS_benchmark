@@ -50,31 +50,50 @@ if __name__ == '__main__':
     meta_prompt_gen = MetaPromptGen(ann_path="../../data/metrics/det/lvis_v1/lvis_v1_train.json",
                                     label_space_path="../eval_metrics/detection/UniDet-master/datasets/label_spaces/learned_mAP+M.json",
                                     )
-    num_prompts = 1500
-    skill = "counting"
-    generated_txt = []
+    num_prompts = 15
+    skill = "writing"
+    generated_lst_dict = []
     for i in tqdm(range(num_prompts)):
-        template = meta_prompt_gen.gen_meta_prompts(level_id=int(i // (num_prompts / 3)), skill=skill)
+        meta_prompt_dict = meta_prompt_gen.gen_meta_prompts(level_id=int(i // (num_prompts / 3)), skill=skill)
+        template = meta_prompt_dict["meta_prompt"]
         if int(i // (num_prompts / 3)) == 2 and skill == "fidelity":
             max_tokens = 50
         else:
             max_tokens = 40
 
-        chatgpt_out = run_chatgpt(model="text-davinci-003", temp=0.5, meta_prompt=template, max_tokens=max_tokens)
+        # Handle openAI timeout:
+        chatgpt_out = None
+        while chatgpt_out is None:
+            try:
+                chatgpt_out = run_chatgpt(model="text-davinci-003", temp=0.5, meta_prompt=template,
+                                          max_tokens=max_tokens)
+            except:
+                print("OpenAI server out! Will try again Don't worry :D")
+                pass
+
         if skill == "writing":
             if int(i // (num_prompts / 3)) == 2:  # Hard level
                 final_prompt = "a real scene of {place} with a sign written on it {chatgpt_out}".format(
                     place=meta_prompt_gen.select_rand_place(), chatgpt_out=chatgpt_out)
             else:  # Easy & Medium levels
-                final_prompt = "a sign written on it {chatgpt_out}".format(
-                    place=meta_prompt_gen.select_rand_place(), chatgpt_out=chatgpt_out)
+                final_prompt = "a sign written on it {chatgpt_out}".format(chatgpt_out=chatgpt_out)
+            meta_prompt_dict.update({"chatgpt_out": chatgpt_out})
         else:
             final_prompt = chatgpt_out
-        generated_txt.append({"meta_prompt": template, "synthetic_prompt": final_prompt})
+        meta_prompt_dict.update({"synthetic_prompt": final_prompt})
+        generated_lst_dict.append(meta_prompt_dict)
 
-        if i % 15 == 0:
+        if (i % 15 == 0) and (i != 0):
             wait_one_n_mins(n_mins=1)  # wait one minute to not exceed the openai limits
 
-    # save_lst_strings_to_txt(saving_txt="synthetic_" + skill + "_prompts.txt", lst_str=generated_txt)
-    save_prompts_in_csv(lst=generated_txt, saving_name="synthetic_" + skill + "_prompts.csv")
+    generated_dict_lst = {k: [dic[k] for dic in generated_lst_dict] for k in generated_lst_dict[0]}
+
+    # Saving:
+    if skill == "counting":
+        save_lst_strings_to_txt(saving_txt="vanilla_" + skill + "_prompts.txt",
+                                lst_str=generated_dict_lst['vanilla_prompt'])
+    save_lst_strings_to_txt(saving_txt="meta_" + skill + "_prompts.txt", lst_str=generated_dict_lst['meta_prompt'])
+    save_lst_strings_to_txt(saving_txt="synthetic_" + skill + "_prompts.txt",
+                            lst_str=generated_dict_lst['synthetic_prompt'])
+    save_prompts_in_csv(lst=generated_lst_dict, saving_name="synthetic_" + skill + "_prompts.csv")
     print("Done")
