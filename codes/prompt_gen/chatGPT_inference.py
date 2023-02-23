@@ -6,20 +6,17 @@ import openai
 import datetime
 from tqdm import tqdm
 import csv
+import sys
 
 
 def run_chatgpt(model, temp, meta_prompt, max_tokens):
-    # Set your API key
-    # openai.api_key = "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"
-    openai.api_key = "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"
     # Define the parameters for the text generation
-    prompt = "In one sentence, describe a real outdoor scene about transportations and people."
     completions = openai.Completion.create(engine=model, prompt=meta_prompt, max_tokens=max_tokens, n=1, stop=None,
                                            temperature=temp)
     gen_prompt = completions.choices[0].text.strip().lower()
     # Print the generated text
-    print("The meta prompt is: ", meta_prompt)
-    print("ChatGPT output is: ", gen_prompt)
+    print("The meta prompt is --> ", meta_prompt)
+    print("ChatGPT output is --> ", gen_prompt)
     return gen_prompt
 
 
@@ -47,11 +44,14 @@ def wait_one_n_mins(n_mins=1):
 
 
 if __name__ == '__main__':
+    # Set your API key
+    openai.api_key = sys.argv[1]
+
     meta_prompt_gen = MetaPromptGen(ann_path="../../data/metrics/det/lvis_v1/lvis_v1_train.json",
                                     label_space_path="../eval_metrics/detection/UniDet-master/datasets/label_spaces/learned_mAP+M.json",
                                     )
-    num_prompts = 15
-    skill = "writing"
+    num_prompts = 6000
+    skill = "fidelity"
     generated_lst_dict = []
     for i in tqdm(range(num_prompts)):
         meta_prompt_dict = meta_prompt_gen.gen_meta_prompts(level_id=int(i // (num_prompts / 3)), skill=skill)
@@ -83,7 +83,7 @@ if __name__ == '__main__':
         meta_prompt_dict.update({"synthetic_prompt": final_prompt})
         generated_lst_dict.append(meta_prompt_dict)
 
-        if (i % 15 == 0) and (i != 0):
+        if (i % 20 == 0) and (i != 0):
             wait_one_n_mins(n_mins=1)  # wait one minute to not exceed the openai limits
 
     generated_dict_lst = {k: [dic[k] for dic in generated_lst_dict] for k in generated_lst_dict[0]}

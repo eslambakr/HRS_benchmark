@@ -1,0 +1,15 @@
+1 bicycle
+1 dining table
+1 remote
+1 zebra
+2 knife
+3 bicycle and 3 snowboard
+3 wine glass and 2 fire hydrant
+2 cat and 2 chair
+2 horse and 2 book
+3 tie and 3 giraffe
+4 bird and 5 vase
+5 cell phone and 5 carrot
+5 sandwich and 4 sheep
+4 horse and 4 zebra
+4 surfboard and 4 sports ball

@@ -15,7 +15,9 @@ class MetaPromptGen:
     def __init__(self, ann_path, label_space_path):
         self.possible_scenarios = None
         self.levels = ["easy", "medium", "hard"]
-        self.styles = [["animation", "real", "sketch"], ["sunny", "cloudy", "rainy"], ["colored", "black and white"],
+        self.styles = [["animation", "real", "sketch"],
+                       ["sunny", "cloudy", "rainy"],
+                       ["colored", "black and white"],
                        ["morning", "night"]]
         self.scenarios_objs_map = ScenariosObjsMapping(ann_path=ann_path, label_space_path=label_space_path)
         self.data_type = "unidet"  # ["coco", "unidet"]
@@ -63,7 +65,12 @@ class MetaPromptGen:
 
     def _select_rand_style(self, num):
         sampled_styles = np.random.choice(a=self.styles, size=num, replace=False)
-        return [random.choice(style) for style in sampled_styles]
+        sampled_styles = [random.choice(style) for style in sampled_styles]
+        # handle the conflict between sunny and night:
+        if (num > 1) and ("night" in sampled_styles) and ("sunny" in sampled_styles):
+            sampled_styles = list(map(lambda x: x.replace('night', 'morning'), sampled_styles))
+
+        return sampled_styles
 
     def select_rand_place(self):
         place = random.choice(self.places365).replace("_", " ")
@@ -108,6 +115,7 @@ class MetaPromptGen:
 
     def _fidelity_gen(self):
         self.possible_scenarios = []
+        obj1, obj2, obj3, style1, style2, style3 = None, None, None, None, None, None
         for k, v in self.scenarios_objs_map.unidet_scenario_obj_map.items():
             if v:
                 self.possible_scenarios.append(k)
@@ -138,7 +146,8 @@ class MetaPromptGen:
         else:
             raise Exception("Sorry, the selected level is not implemented, the only implemented options are ",
                             self.levels)
-        return "In one sentence, " + template
+        return {"meta_prompt": "In one sentence, " + template, "obj1": obj1, "obj2": obj2, "obj3": obj3,
+                "style1": style1, "style2": style2, "style3": style3}
 
     def _writing_gen(self):
         self.possible_scenarios = []
