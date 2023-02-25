@@ -14,6 +14,12 @@
 --output "../../../../data/metrics/det/unified_det" 
 --opts MODEL.WEIGHTS "../../../../weights/unified_det/Unified_learned_OCIM_RS200_6x+2x.pth"
 """
+"""
+--config-file configs/Partitioned_COI_RS101_2x.yaml 
+--input "../../../../data/t2i_out/sd_v2/vanilla_counting/*" 
+--output "../../../../data/metrics/det/unified_det" 
+--opts MODEL.WEIGHTS "../../../../weights/unified_det/Partitioned_COI_RS101_2x.pth"
+"""
 # Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved
 import argparse
 import glob
@@ -163,7 +169,7 @@ if __name__ == "__main__":
                 if cv2.waitKey(0) == 27:
                     break  # esc to quit
 
-        with open('../unidet_pred_vanilla_counting.pkl', 'wb') as f:
+        with open('../sdv1_pred_vanilla_counting.pkl', 'wb') as f:
             pickle.dump(output_lst_dict, f)
 
     elif args.webcam:

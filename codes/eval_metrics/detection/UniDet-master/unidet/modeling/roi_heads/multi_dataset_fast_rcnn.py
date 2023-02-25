@@ -25,7 +25,9 @@ class MultiDatasetFastRCNNOutputLayers(CustomFastRCNNOutputLayers):
             bias_value = -math.log((1 - prior_prob) / prior_prob)
         else:
             bias_value = 0
-        self.openimage_index = cfg.MULTI_DATASET.DATASETS.index('oid')
+        # Eslam
+        if 'oid' in cfg.MULTI_DATASET.DATASETS:
+            self.openimage_index = cfg.MULTI_DATASET.DATASETS.index('oid')
         self.num_datasets = len(num_classes_list)
         self.cls_score = nn.ModuleList()
         for num_classes in num_classes_list:

@@ -39,6 +39,10 @@ class UnifiedVisualizationDemo(object):
         else:
             self.predictor = DefaultPredictor(cfg)
 
+        # Eslam
+        self.metadata = self.predictor.metadata
+        print("In Progress")
+
     def run_on_image(self, image):
         """
         Args:

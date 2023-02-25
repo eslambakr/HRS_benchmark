@@ -35,10 +35,11 @@ DATALOADER:
   NUM_WORKERS: 1
 MULTI_DATASET:
   ENABLED: True
-  DATASETS: ['coco', 'objects365', 'oid']
-  NUM_CLASSES: [80, 365, 500]
+  DATASETS: ['objects365', 'coco', 'oid']
+  NUM_CLASSES: [365, 80, 500]
   DATA_RATIO: [1, 1, 1]
   USE_CAS: [False, True, True]
+  UNIFIED_LABEL_FILE: 'datasets/label_spaces/learned_mAP+M.json'
 SOLVER:
   IMS_PER_BATCH: 16
   STEPS: (120000, 160000)

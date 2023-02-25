@@ -23,7 +23,7 @@ class SplitClassifierRCNN(GeneralizedRCNN):
         self.datasets = cfg.MULTI_DATASET.DATASETS
         self.num_datasets = len(self.datasets)
         self.dataset_name_to_id = {k: i for i, k in enumerate(self.datasets)}
-        self.eval_dataset = -1
+        self.eval_dataset = 1  # Eslam
 
     def forward(self, batched_inputs):
         if not self.training:
