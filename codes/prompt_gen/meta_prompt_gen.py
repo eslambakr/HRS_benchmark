@@ -34,6 +34,7 @@ class MetaPromptGen:
         self.coco_classes = [obj.strip('\n') for obj in coco_classes]
 
         self._init_spatial_rel()
+        self._init_size_comp()
 
     def _init_spatial_rel(self):
         coco_obj_of_interest = ["person", "car", "airplane", "cat", "dog", "banana", "horse", "chair"]
@@ -69,6 +70,10 @@ class MetaPromptGen:
             inv_obj_fours.append((item[0], item[3], item[1], item[2]))
             inv_obj_fours.append((item[0], item[3], item[2], item[1]))
         self.obj_fours = obj_fours + inv_obj_fours
+
+    def _init_size_comp(self):
+        self._init_spatial_rel()
+        self.size_rel_words = ["larger", "bigger", "smaller"]
 
     def _select_rand_objs(self, num):
         objs = []
@@ -257,6 +262,41 @@ class MetaPromptGen:
         return {"meta_prompt": template, "obj1": obj1, "obj2": obj2, "obj3": obj3, "obj4": obj4,
                 "rel1": rel1, "rel2": rel2}
 
+    def _size_comp(self):
+        obj1, obj2, obj3, obj4 = None, None, None, None
+        rel1, rel2 = None, None
+
+        if self.level == "easy":
+            # Easy level (add relation to obj_pairs):
+            rel1 = np.random.choice(a=self.size_rel_words, size=1, replace=False)[0]
+            obj1, obj2 = self.obj_pairs[np.random.choice(a=np.arange(len(self.obj_pairs)), size=1, replace=False)[0]]
+            template = "a {obj1} and a {obj2}, the {obj1} is {rel1} than the {obj2}.".format(obj1=obj1, obj2=obj2,
+                                                                                             rel1=rel1)
+
+        elif self.level == "medium":
+            # Medium level (add two relation to obj_triplets):
+            obj1, obj2, obj3 = self.obj_triplets[np.random.choice(a=np.arange(len(self.obj_triplets)),
+                                                                  size=1, replace=False)[0]]
+            rel1, rel2 = np.random.choice(a=self.size_rel_words, size=2, replace=False)
+            template = "a {obj1} which is {rel1} than a {obj2} and {rel2} than {obj3}.".format(obj1=obj1, obj2=obj2,
+                                                                                               obj3=obj3, rel1=rel1,
+                                                                                               rel2=rel2)
+
+        elif self.level == "hard":
+            # Hard level (add three relation to obj_fours):
+            obj1, obj2, obj3, obj4 = self.obj_fours[np.random.choice(a=np.arange(len(self.obj_fours)),
+                                                                     size=1, replace=False)[0]]
+            rel1, rel2 = np.random.choice(a=self.size_rel_words, size=2, replace=False)
+            template = "a {obj1} which is {rel1} than a {obj2} and {obj3} and {rel2} than {obj4}.".format(
+                obj1=obj1, obj2=obj2,
+                obj3=obj3, obj4=obj4,
+                rel1=rel1, rel2=rel2)
+        else:
+            raise Exception("Sorry, the selected level is not implemented, the only implemented options are ",
+                            self.levels)
+        return {"meta_prompt": template, "obj1": obj1, "obj2": obj2, "obj3": obj3, "obj4": obj4,
+                "rel1": rel1, "rel2": rel2}
+
     def gen_meta_prompts(self, level_id, skill):
         self.level = self.levels[level_id]
         if skill == "fidelity":
@@ -267,6 +307,8 @@ class MetaPromptGen:
             gen_meta_prompt = self._writing_gen()
         elif skill == "spatial_relation":
             gen_meta_prompt = self._spatial_rel()
+        elif skill == "size_comp":
+            gen_meta_prompt = self._size_comp()
         else:
             raise Exception("Sorry, the selected skill is not implemented")
 

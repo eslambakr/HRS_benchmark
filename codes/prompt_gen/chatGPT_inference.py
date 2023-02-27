@@ -50,8 +50,8 @@ if __name__ == '__main__':
     meta_prompt_gen = MetaPromptGen(ann_path="../../data/metrics/det/lvis_v1/lvis_v1_train.json",
                                     label_space_path="../eval_metrics/detection/UniDet-master/datasets/label_spaces/learned_mAP+M.json",
                                     )
-    num_prompts = 1002
-    skill = "spatial_relation"
+    num_prompts = 501
+    skill = "size_comp"
     generated_lst_dict = []
     for i in tqdm(range(num_prompts)):
         meta_prompt_dict = meta_prompt_gen.gen_meta_prompts(level_id=int(i // (num_prompts / 3)), skill=skill)
@@ -64,7 +64,7 @@ if __name__ == '__main__':
         # Handle openAI timeout:
         chatgpt_out = None
         while chatgpt_out is None:
-            if skill == "spatial_relation":  # we will not use ChatGPT for this skill.
+            if (skill == "spatial_relation") or (skill == "size_comp"):  # we will not use ChatGPT for this skill.
                 break
             try:
                 chatgpt_out = run_chatgpt(model="text-davinci-003", temp=0.5, meta_prompt=template,
