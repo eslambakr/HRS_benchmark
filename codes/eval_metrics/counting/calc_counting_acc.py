@@ -48,12 +48,13 @@ def load_pred(pkl_pth, iter_idx):
     return pred_objs
 
 
-def cal_acc(gt_objs, pred_objs):
+def cal_acc(gt_objs, pred_objs, level):
     # Calculate the Acc:
     true_pos = 0
     false_pos = 0
     false_neg = 0
     for img_id, sample in enumerate(gt_objs):
+        img_id += (level*1000)
         for obj_name, gt_num in sample.items():
             pred_num = 0
             for k, pred_obj in pred_objs[img_id].items():
@@ -63,28 +64,52 @@ def cal_acc(gt_objs, pred_objs):
             false_pos = false_pos + max((pred_num-gt_num), 0)
             false_neg = false_neg + max((gt_num-pred_num), 0)
 
-    precision = true_pos / (true_pos + false_pos)  # top, center, side, back
-    # trash can, laundry hamper, bathroom stall door, paper towel dispenser, coffee table, kitchen cabinet,
-    # office chair, copier, kitchen cabinets, end table, kitchen counter, file cabinet, oven
+    precision = true_pos / (true_pos + false_pos)
     recall = true_pos / (true_pos + false_neg)
     return [precision, recall]
 
 
 if __name__ == "__main__":
     # Load GT:
-    gt_objs = load_gt(csv_pth='../../prompt_gen/synthetic_counting_prompts_15.csv')
-    iter_num = 5
-    precisions, recalls = [], []
+    gt_objs = load_gt(csv_pth='../../prompt_gen/counting_prompts/synthetic_counting_prompts.csv')
+    iter_num = 3
+    precisions, recalls, f1 = [], [], []
+    precisions_per_level = {0: [], 1: [], 2: []}
+    recalls_per_level = {0: [], 1: [], 2: []}
+    f1_per_level = {0: [], 1: [], 2: []}
     for iter_idx in range(iter_num):
-        # Load Predictions:
-        pred_objs = load_pred(pkl_pth='unidet_pred_synthetic_counting.pkl', iter_idx=iter_idx)
-        # Calculate the counting Accuracy:
-        counting_acc = cal_acc(gt_objs, pred_objs)
-        precisions.append(counting_acc[0])
-        recalls.append(counting_acc[1])
-        print("precision ", iter_idx, ": ", counting_acc[0] * 100, "%")
-        print("recall ", iter_idx, ": ", counting_acc[1] * 100, "%")
+        for level in range(3):
+            # Load Predictions:
+            pred_objs = load_pred(pkl_pth='glide_pred_synthetic_counting.pkl', iter_idx=iter_idx)
+            # Calculate the counting Accuracy:
+            precision, recall = cal_acc(gt_objs[level*1000:(level+1)*1000], pred_objs, level=level)
+            precision *= 100
+            recall *= 100
+            precisions.append(precision)
+            recalls.append(recall)
+            f1.append((2*precision*recall)/(precision+recall))
+            print("precision ", iter_idx, ": ", precision, "%")
+            print("recall ", iter_idx, ": ", recall, "%")
+            print("F1 Score ", iter_idx, ": ", f1[-1], "%")
+            # Per level:
+            precisions_per_level[level].append(precision)
+            recalls_per_level[level].append(recall)
+            f1_per_level[level].append((2 * precision * recall) / (precision + recall))
+
+    for level in range(3):
+        print("----------------------------")
+        if level == 0:
+            print("   Easy level Results   ")
+        elif level == 1:
+            print("   Medium level Results   ")
+        elif level == 2:
+            print("   Hard level Results   ")
+        print("precision: ", (sum(precisions_per_level[level]) / len(precisions_per_level[level])), "%")
+        print("recall: ", (sum(recalls_per_level[level]) / len(recalls_per_level[level])), "%")
+        print("F1 Score : ", (sum(f1_per_level[level]) / len(f1_per_level[level])), "%")
     print("----------------------------")
-    print("precision: ", (sum(precisions)/len(precisions)) * 100, "%")
-    print("recall: ", (sum(recalls)/len(recalls)) * 100, "%")
+    print("   Average level Results   ")
+    print("precision: ", (sum(precisions)/len(precisions)), "%")
+    print("recall: ", (sum(recalls)/len(recalls)), "%")
+    print("F1 Score : ", (sum(f1)/len(f1)), "%")
     print("Done!")
