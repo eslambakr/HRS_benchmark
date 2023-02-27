@@ -6,6 +6,7 @@ The generated meta-prompt will be based on the desired skill.
 import sys
 import numpy as np
 import random
+from itertools import chain, combinations
 
 sys.path.append('../eval_metrics/detection')
 from scenarios_obj_map import ScenariosObjsMapping
@@ -31,6 +32,43 @@ class MetaPromptGen:
         coco_classes = open("coco.txt", "r")
         coco_classes = coco_classes.readlines()
         self.coco_classes = [obj.strip('\n') for obj in coco_classes]
+
+        self._init_spatial_rel()
+
+    def _init_spatial_rel(self):
+        coco_obj_of_interest = ["person", "car", "airplane", "cat", "dog", "banana", "horse", "chair"]
+        self.norm_spatial_relations = ["on the right of", "on the left of", "on", "above", "over", "below", "beneath",
+                                       "under"]
+        self.relative_relations = ["between", "among", "in the middle of"]
+        obj_pairs = list(combinations(coco_obj_of_interest, 2))
+        obj_triplets = list(combinations(coco_obj_of_interest, 3))
+        obj_fours = list(combinations(coco_obj_of_interest, 4))
+
+        # invert the order of the pairs, e.g., (person, car) --> (car, person)
+        inv_obj_pairs = []
+        for item in obj_pairs:
+            inv_obj_pairs.append((item[1], item[0]))
+        self.obj_pairs = obj_pairs + inv_obj_pairs
+
+        # invert the order of the triplets, e.g., (person, car, airplane) --> (car, person, airplane)
+        inv_obj_triplets = []
+        for item in obj_triplets:
+            inv_obj_triplets.append((item[0], item[2], item[1]))
+            inv_obj_triplets.append((item[1], item[2], item[0]))
+            inv_obj_triplets.append((item[1], item[0], item[2]))
+            inv_obj_triplets.append((item[2], item[1], item[0]))
+            inv_obj_triplets.append((item[2], item[0], item[1]))
+        self.obj_triplets = obj_triplets + inv_obj_triplets
+
+        # invert the order of the four set, e.g., (person, car, airplane, bench) --> (car, person, bench, airplane)
+        inv_obj_fours = []
+        for item in obj_fours:
+            inv_obj_fours.append((item[0], item[1], item[3], item[2]))
+            inv_obj_fours.append((item[0], item[2], item[3], item[1]))
+            inv_obj_fours.append((item[0], item[2], item[1], item[3]))
+            inv_obj_fours.append((item[0], item[3], item[1], item[2]))
+            inv_obj_fours.append((item[0], item[3], item[2], item[1]))
+        self.obj_fours = obj_fours + inv_obj_fours
 
     def _select_rand_objs(self, num):
         objs = []
@@ -176,6 +214,49 @@ class MetaPromptGen:
                             self.levels)
         return {"meta_prompt": "one sentence of " + template, "n1": n1, "obj1": obj1, "obj2": obj2}
 
+    def _spatial_rel(self):
+        obj1, obj2, obj3, obj4 = None, None, None, None
+        rel1, rel2 = None, None
+
+        if self.level == "easy":
+            # Easy level (add relation to obj_pairs):
+            rel1 = np.random.choice(a=self.norm_spatial_relations, size=1, replace=False)[0]
+            obj1, obj2 = self.obj_pairs[np.random.choice(a=np.arange(len(self.obj_pairs)), size=1, replace=False)[0]]
+            template = "a {obj1} {rel1} a {obj2}.".format(obj1=obj1, obj2=obj2, rel1=rel1)
+
+        elif self.level == "medium":
+            # Medium level (add two relation to obj_triplets):
+            obj1, obj2, obj3 = self.obj_triplets[np.random.choice(a=np.arange(len(self.obj_triplets)),
+                                                                  size=1, replace=False)[0]]
+            relation_type = random.choices(["norm_rel", "relative_rel"], weights=(80, 20))[0]
+            if relation_type == "norm_rel":
+                rel1, rel2 = np.random.choice(a=self.norm_spatial_relations, size=2, replace=False)
+                template = "a {obj1} {rel1} a {obj2} and {rel2} a {obj3}.".format(obj1=obj1, obj2=obj2, obj3=obj3,
+                                                                                  rel1=rel1, rel2=rel2)
+            elif relation_type == "relative_rel":
+                rel1 = np.random.choice(a=self.relative_relations, size=1, replace=False)[0]
+                template = "a {obj1} {rel1} {obj2} and {obj3}.".format(obj1=obj1, obj2=obj2, obj3=obj3, rel1=rel1)
+
+        elif self.level == "hard":
+            # Hard level (add three relation to obj_fours):
+            obj1, obj2, obj3, obj4 = self.obj_fours[np.random.choice(a=np.arange(len(self.obj_fours)),
+                                                                     size=1, replace=False)[0]]
+            relation_type = random.choices(["norm_rel", "relative_rel"], weights=(80, 20))[0]
+            if relation_type == "norm_rel":
+                rel1, rel2 = np.random.choice(a=self.norm_spatial_relations, size=2, replace=False)
+                template = "a {obj1} and {obj2} {rel1} a {obj3} and {rel2} a {obj4}.".format(obj1=obj1, obj2=obj2,
+                                                                                             obj3=obj3, obj4=obj4,
+                                                                                             rel1=rel1, rel2=rel2)
+            elif relation_type == "relative_rel":
+                rel1 = np.random.choice(a=self.relative_relations, size=1, replace=False)[0]
+                template = "a {obj1} and a {obj2} {rel1} {obj3} and {obj4}.".format(obj1=obj1, obj2=obj2, obj3=obj3,
+                                                                                    obj4=obj4, rel1=rel1)
+        else:
+            raise Exception("Sorry, the selected level is not implemented, the only implemented options are ",
+                            self.levels)
+        return {"meta_prompt": template, "obj1": obj1, "obj2": obj2, "obj3": obj3, "obj4": obj4,
+                "rel1": rel1, "rel2": rel2}
+
     def gen_meta_prompts(self, level_id, skill):
         self.level = self.levels[level_id]
         if skill == "fidelity":
@@ -184,6 +265,8 @@ class MetaPromptGen:
             gen_meta_prompt = self._counting_gen()
         elif skill == "writing":
             gen_meta_prompt = self._writing_gen()
+        elif skill == "spatial_relation":
+            gen_meta_prompt = self._spatial_rel()
         else:
             raise Exception("Sorry, the selected skill is not implemented")
 

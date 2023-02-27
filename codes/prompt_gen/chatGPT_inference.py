@@ -50,8 +50,8 @@ if __name__ == '__main__':
     meta_prompt_gen = MetaPromptGen(ann_path="../../data/metrics/det/lvis_v1/lvis_v1_train.json",
                                     label_space_path="../eval_metrics/detection/UniDet-master/datasets/label_spaces/learned_mAP+M.json",
                                     )
-    num_prompts = 6000
-    skill = "fidelity"
+    num_prompts = 1002
+    skill = "spatial_relation"
     generated_lst_dict = []
     for i in tqdm(range(num_prompts)):
         meta_prompt_dict = meta_prompt_gen.gen_meta_prompts(level_id=int(i // (num_prompts / 3)), skill=skill)
@@ -64,6 +64,8 @@ if __name__ == '__main__':
         # Handle openAI timeout:
         chatgpt_out = None
         while chatgpt_out is None:
+            if skill == "spatial_relation":  # we will not use ChatGPT for this skill.
+                break
             try:
                 chatgpt_out = run_chatgpt(model="text-davinci-003", temp=0.5, meta_prompt=template,
                                           max_tokens=max_tokens)
@@ -83,17 +85,18 @@ if __name__ == '__main__':
         meta_prompt_dict.update({"synthetic_prompt": final_prompt})
         generated_lst_dict.append(meta_prompt_dict)
 
-        if (i % 20 == 0) and (i != 0):
+        if (i % 20 == 0) and (i != 0) and chatgpt_out:
             wait_one_n_mins(n_mins=1)  # wait one minute to not exceed the openai limits
 
     generated_dict_lst = {k: [dic[k] for dic in generated_lst_dict] for k in generated_lst_dict[0]}
 
     # Saving:
+    save_prompts_in_csv(lst=generated_lst_dict, saving_name="synthetic_" + skill + "_prompts.csv")
     if skill == "counting":
         save_lst_strings_to_txt(saving_txt="vanilla_" + skill + "_prompts.txt",
                                 lst_str=generated_dict_lst['vanilla_prompt'])
     save_lst_strings_to_txt(saving_txt="meta_" + skill + "_prompts.txt", lst_str=generated_dict_lst['meta_prompt'])
     save_lst_strings_to_txt(saving_txt="synthetic_" + skill + "_prompts.txt",
                             lst_str=generated_dict_lst['synthetic_prompt'])
-    save_prompts_in_csv(lst=generated_lst_dict, saving_name="synthetic_" + skill + "_prompts.csv")
+
     print("Done")
