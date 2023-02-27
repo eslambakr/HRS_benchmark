@@ -54,7 +54,7 @@ def cal_acc(gt_objs, pred_objs, level):
     false_pos = 0
     false_neg = 0
     for img_id, sample in enumerate(gt_objs):
-        img_id += (level*1000)
+        img_id += (level * int(len(gt_objs) / 3))
         for obj_name, gt_num in sample.items():
             pred_num = 0
             for k, pred_obj in pred_objs[img_id].items():
@@ -79,10 +79,11 @@ if __name__ == "__main__":
     f1_per_level = {0: [], 1: [], 2: []}
     for iter_idx in range(iter_num):
         for level in range(3):
+            mul = int(len(gt_objs) / 3)
             # Load Predictions:
             pred_objs = load_pred(pkl_pth='glide_pred_synthetic_counting.pkl', iter_idx=iter_idx)
             # Calculate the counting Accuracy:
-            precision, recall = cal_acc(gt_objs[level*1000:(level+1)*1000], pred_objs, level=level)
+            precision, recall = cal_acc(gt_objs[level*mul:(level+1)*mul], pred_objs, level=level)
             precision *= 100
             recall *= 100
             precisions.append(precision)
