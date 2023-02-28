@@ -3,6 +3,7 @@ import csv
 import json
 import pickle
 from tqdm import tqdm
+import sys
 
 
 def convert_csv_2_txt():
@@ -70,8 +71,10 @@ def cal_acc(gt_objs, pred_objs, level):
 
 
 if __name__ == "__main__":
+    in_pkl = sys.argv[1]
+    gt_csv = sys.argv[2]
     # Load GT:
-    gt_objs = load_gt(csv_pth='../../prompt_gen/counting_prompts/synthetic_counting_prompts.csv')
+    gt_objs = load_gt(csv_pth=gt_csv)
     iter_num = 3
     precisions, recalls, f1 = [], [], []
     precisions_per_level = {0: [], 1: [], 2: []}
@@ -81,7 +84,7 @@ if __name__ == "__main__":
         for level in range(3):
             mul = int(len(gt_objs) / 3)
             # Load Predictions:
-            pred_objs = load_pred(pkl_pth='glide_pred_synthetic_counting.pkl', iter_idx=iter_idx)
+            pred_objs = load_pred(pkl_pth=in_pkl, iter_idx=iter_idx)
             # Calculate the counting Accuracy:
             precision, recall = cal_acc(gt_objs[level*mul:(level+1)*mul], pred_objs, level=level)
             precision *= 100

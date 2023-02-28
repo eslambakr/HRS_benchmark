@@ -3,6 +3,7 @@ import csv
 import json
 import pickle
 from tqdm import tqdm
+import os, sys
 
 
 def load_gt(csv_pth):
@@ -262,16 +263,18 @@ def cal_acc(gt_objs, pred_objs, level):
 
 
 if __name__ == "__main__":
+    in_pkl = sys.argv[1]
+    gt_csv = sys.argv[2]
     # Load GT:
-    gt_data = load_gt(csv_pth='../../prompt_gen/compositional_skill/spatial/synthetic_spatial_relation_prompts.csv')
-    iter_num = 1
+    gt_data = load_gt(csv_pth=gt_csv)
+    iter_num = 3
     avg_acc = []
     acc_per_level = {0: [], 1: [], 2: []}
     for iter_idx in range(iter_num):
         for level in range(3):
             mul = int(len(gt_data)/3)
             # Load Predictions:
-            pred_data = load_pred(pkl_pth='dalle_v2_pred_spatial.pkl', iter_idx=iter_idx)
+            pred_data = load_pred(pkl_pth=in_pkl, iter_idx=iter_idx)
             # Calculate the counting Accuracy:
             acc = cal_acc(gt_data[level*mul:(level+1)*mul], pred_data, level=level)
             avg_acc.append(acc)
@@ -287,7 +290,7 @@ if __name__ == "__main__":
             print("   Medium level Results   ")
         elif level == 2:
             print("   Hard level Results   ")
-        print("precision: ", (sum(acc_per_level[level]) / len(acc_per_level[level])), "%")
+        print("Accuracy: ", (sum(acc_per_level[level]) / len(acc_per_level[level])), "%")
     print("----------------------------")
     print("   Average level Results   ")
     print("Averaged Accuracy: ", (sum(avg_acc)/len(avg_acc)), "%")
