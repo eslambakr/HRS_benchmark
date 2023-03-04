@@ -20,6 +20,7 @@ class MetaPromptGen:
                        ["sunny", "cloudy", "rainy"],
                        ["colored", "black and white"],
                        ["morning", "night"]]
+        self.fairness_styles = ["animation", "real", "sketch", "sunny", "cloudy", "rainy", "black and white"]
         self.scenarios_objs_map = ScenariosObjsMapping(ann_path=ann_path, label_space_path=label_space_path)
         self.data_type = "unidet"  # ["coco", "unidet"]
 
@@ -35,6 +36,7 @@ class MetaPromptGen:
 
         self._init_spatial_rel()
         self._init_size_comp()
+        self._init_color_comp()
 
     def _init_spatial_rel(self):
         coco_obj_of_interest = ["person", "car", "airplane", "cat", "dog", "banana", "horse", "chair"]
@@ -74,6 +76,10 @@ class MetaPromptGen:
     def _init_size_comp(self):
         self._init_spatial_rel()
         self.size_rel_words = ["larger", "bigger", "smaller"]
+
+    def _init_color_comp(self):
+        self._init_spatial_rel()
+        self.color_words = ["red", "blue", "green", "yellow", "orange"]
 
     def _select_rand_objs(self, num):
         objs = []
@@ -297,6 +303,38 @@ class MetaPromptGen:
         return {"meta_prompt": template, "obj1": obj1, "obj2": obj2, "obj3": obj3, "obj4": obj4,
                 "rel1": rel1, "rel2": rel2}
 
+    def _color_comp(self):
+        obj1, obj2, obj3, obj4 = None, None, None, None
+        color1, color2, color3, color4 = None, None, None, None
+
+        if self.level == "easy":
+            # Easy level (add relation to obj_pairs):
+            color1, color2 = np.random.choice(a=self.color_words, size=2, replace=False)
+            obj1, obj2 = self.obj_pairs[np.random.choice(a=np.arange(len(self.obj_pairs)), size=1, replace=False)[0]]
+            template = "a {color1} {obj1} and a {color2} {obj2}.".format(
+                obj1=obj1, obj2=obj2, color1=color1, color2=color2)
+
+        elif self.level == "medium":
+            # Medium level (add two relation to obj_triplets):
+            obj1, obj2, obj3 = self.obj_triplets[np.random.choice(a=np.arange(len(self.obj_triplets)),
+                                                                  size=1, replace=False)[0]]
+            color1, color2, color3 = np.random.choice(a=self.color_words, size=3, replace=False)
+            template = "a {color1} {obj1}, a {color2} {obj2} and a {color3} {obj3}.".format(
+                obj1=obj1, obj2=obj2, obj3=obj3, color1=color1, color2=color2, color3=color3)
+
+        elif self.level == "hard":
+            # Hard level (add three relation to obj_fours):
+            obj1, obj2, obj3, obj4 = self.obj_fours[np.random.choice(a=np.arange(len(self.obj_fours)),
+                                                                     size=1, replace=False)[0]]
+            color1, color2, color3, color4 = np.random.choice(a=self.color_words, size=4, replace=False)
+            template = "a {color1} {obj1}, a {color2} {obj2}, a {color3} {obj3} and a {color4} {obj4}.".format(
+                obj1=obj1, obj2=obj2, obj3=obj3, obj4=obj4, color1=color1, color2=color2, color3=color3, color4=color4)
+        else:
+            raise Exception("Sorry, the selected level is not implemented, the only implemented options are ",
+                            self.levels)
+        return {"meta_prompt": template, "obj1": obj1, "obj2": obj2, "obj3": obj3, "obj4": obj4,
+                "color1": color1, "color2": color2, "color3": color3, "color4": color4}
+
     def gen_meta_prompts(self, level_id, skill):
         self.level = self.levels[level_id]
         if skill == "fidelity":
@@ -309,6 +347,8 @@ class MetaPromptGen:
             gen_meta_prompt = self._spatial_rel()
         elif skill == "size_comp":
             gen_meta_prompt = self._size_comp()
+        elif skill == "color_comp":
+            gen_meta_prompt = self._color_comp()
         else:
             raise Exception("Sorry, the selected skill is not implemented")
 
