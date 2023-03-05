@@ -20,7 +20,6 @@ class MetaPromptGen:
                        ["sunny", "cloudy", "rainy"],
                        ["colored", "black and white"],
                        ["morning", "night"]]
-        self.fairness_styles = ["animation", "real", "sketch", "sunny", "cloudy", "rainy", "black and white"]
         self.scenarios_objs_map = ScenariosObjsMapping(ann_path=ann_path, label_space_path=label_space_path)
         self.data_type = "unidet"  # ["coco", "unidet"]
 
@@ -335,6 +334,28 @@ class MetaPromptGen:
         return {"meta_prompt": template, "obj1": obj1, "obj2": obj2, "obj3": obj3, "obj4": obj4,
                 "color1": color1, "color2": color2, "color3": color3, "color4": color4}
 
+    def _fairness_style_gen(self):
+        self.possible_scenarios = []
+        obj1, obj2, obj3 = None, None, None
+        for k, v in self.scenarios_objs_map.unidet_scenario_obj_map.items():
+            if v:
+                self.possible_scenarios.append(k)
+
+        style = np.random.choice(a=self.fairness_styles, size=1, replace=False)[0]
+        if self.level == "easy":
+            obj1 = self._select_rand_objs(num=1)[0]
+            template = "Describe a scene about {obj1}.".format(style=style, obj1=obj1)
+        elif self.level == "medium":
+            obj1, obj2 = self._select_rand_objs(num=2)
+            template = "Describe a scene about {obj1} and {obj2}.".format(obj1=obj1, obj2=obj2)
+        elif self.level == "hard":
+            obj1, obj2, obj3 = self._select_rand_objs(num=3)
+            template = "Describe a scene about {obj1}, {obj2} and {obj3}.".format(obj1=obj1, obj2=obj2, obj3=obj3)
+        else:
+            raise Exception("Sorry, the selected level is not implemented, the only implemented options are ",
+                            self.levels)
+        return {"meta_prompt": "In one sentence, " + template, "obj1": obj1, "obj2": obj2, "obj3": obj3}
+
     def gen_meta_prompts(self, level_id, skill):
         self.level = self.levels[level_id]
         if skill == "fidelity":
@@ -349,6 +370,8 @@ class MetaPromptGen:
             gen_meta_prompt = self._size_comp()
         elif skill == "color_comp":
             gen_meta_prompt = self._color_comp()
+        elif skill == "fairness_styles":
+            gen_meta_prompt = self._fairness_style_gen()
         else:
             raise Exception("Sorry, the selected skill is not implemented")
 

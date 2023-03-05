@@ -50,8 +50,8 @@ if __name__ == '__main__':
     meta_prompt_gen = MetaPromptGen(ann_path="../../data/metrics/det/lvis_v1/lvis_v1_train.json",
                                     label_space_path="../eval_metrics/detection/UniDet-master/datasets/label_spaces/learned_mAP+M.json",
                                     )
-    num_prompts = 501
-    skill = "color_comp"
+    num_prompts = 216
+    skill = "fairness_styles"
     generated_lst_dict = []
     for i in tqdm(range(num_prompts)):
         meta_prompt_dict = meta_prompt_gen.gen_meta_prompts(level_id=int(i // (num_prompts / 3)), skill=skill)
