@@ -73,9 +73,9 @@ def cal_acc(gt_objs, pred_objs, level):
 if __name__ == "__main__":
     in_pkl = sys.argv[1]
     gt_csv = sys.argv[2]
+    iter_num = int(sys.argv[3])  # e.g., 1
     # Load GT:
     gt_objs = load_gt(csv_pth=gt_csv)
-    iter_num = 3
     precisions, recalls, f1 = [], [], []
     precisions_per_level = {0: [], 1: [], 2: []}
     recalls_per_level = {0: [], 1: [], 2: []}
