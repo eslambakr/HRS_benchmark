@@ -1,0 +1,217 @@
+meta_prompt,obj1,obj2,obj3,synthetic_prompt
+"In one sentence, Describe a scene about cow.",cow,,,a peaceful meadow with a herd of cows grazing in the grass and a bright blue sky above.
+"In one sentence, Describe a scene about cat.",cat,,,"a fluffy white cat is curled up on a windowsill, basking in the sun and purring contentedly."
+"In one sentence, Describe a scene about toilet.",toilet,,,"a person is sitting on the toilet in a dimly lit bathroom, looking bored."
+"In one sentence, Describe a scene about tie.",tie,,,"a man is standing in front of a mirror, carefully knotting a bright blue tie around his neck."
+"In one sentence, Describe a scene about train.",train,,,"a crowded train station bustling with people rushing to catch their trains, the sound of whistles and the smell of diesel in the air."
+"In one sentence, Describe a scene about motorcycle.",motorcycle,,,"a group of bikers roaring down a windy road, the sun setting in the background."
+"In one sentence, Describe a scene about spoon.",spoon,,,"a person is sitting in a sunny kitchen, enjoying a bowl of soup with a large spoon in hand."
+"In one sentence, Describe a scene about toaster.",toaster,,,"a shiny, chrome toaster sits on a kitchen counter, ready to make a delicious breakfast."
+"In one sentence, Describe a scene about keyboard.",keyboard,,,"a person typing quickly on a keyboard, their fingers dancing across the keys as they focus intently on the screen."
+"In one sentence, Describe a scene about chair.",chair,,,"a cozy living room with a warm fire, a soft rug, and a comfortable armchair, perfect for relaxing and reading a book."
+"In one sentence, Describe a scene about banana.",banana,,,"a bunch of yellow bananas hang from a tree in a tropical rainforest, providing a bright and cheerful contrast to the lush green foliage."
+"In one sentence, Describe a scene about broccoli.",broccoli,,,"a steaming plate of freshly-cooked broccoli sits atop a white tablecloth, its vibrant green color contrasting against the table's surface."
+"In one sentence, Describe a scene about mouse.",mouse,,,"a small mouse scurries across a kitchen floor, pausing to nibble on a crumb before continuing on its way."
+"In one sentence, Describe a scene about dog.",dog,,,"a happy golden retriever is running around a park, chasing a ball and playing with other dogs."
+"In one sentence, Describe a scene about skateboard.",skateboard,,,"a teenage boy is skateboarding down a street, doing tricks and jumps with a smile on his face."
+"In one sentence, Describe a scene about elephant.",elephant,,,"an elephant is walking slowly through a grassy savanna, its trunk swaying gently from side to side."
+"In one sentence, Describe a scene about sheep.",sheep,,,a herd of white sheep are grazing in a green meadow on a sunny day.
+"In one sentence, Describe a scene about parking meter.",parking meter,,,"a person is standing at a parking meter, inserting coins and pressing the buttons to purchase a parking ticket."
+"In one sentence, Describe a scene about cell phone.",cell phone,,,a crowded room of people all talking and texting on their cell phones.
+"In one sentence, Describe a scene about car.",car,,,"a red convertible is parked in front of a beach, the sun is setting and the sound of the waves crashing in the background."
+"In one sentence, Describe a scene about couch.",couch,,,"a cozy living room with a large, comfortable couch in the center and bright, inviting pillows scattered around it."
+"In one sentence, Describe a scene about toaster.",toaster,,,"a shiny metal toaster sits on a kitchen counter, ready to pop up a delicious batch of golden-brown toast."
+"In one sentence, Describe a scene about scissors.",scissors,,,a pair of bright silver scissors glinting in the sunlight on a freshly ironed white cloth.
+"In one sentence, Describe a scene about boat.",boat,,,"a small boat glides across the calm lake, its sail billowing in the gentle breeze."
+"In one sentence, Describe a scene about bowl.",bowl,,,"a group of people are gathered around a bowling lane, laughing and cheering as they take turns rolling the ball down the alley towards the pins."
+"In one sentence, Describe a scene about carrot.",carrot,,,"a bright orange carrot sits in the middle of a freshly tilled garden, its vibrant color standing out against the dark soil."
+"In one sentence, Describe a scene about handbag.",handbag,,,"a woman is standing in a store, carefully examining a beautiful, designer handbag that she is considering purchasing."
+"In one sentence, Describe a scene about horse.",horse,,,"a majestic white horse is galloping across a lush green meadow, its mane and tail flowing in the wind."
+"In one sentence, Describe a scene about book.",book,,,"a person is sitting in a cozy chair, reading a book with a cup of hot tea nearby."
+"In one sentence, Describe a scene about vase.",vase,,,"a beautiful vase filled with fresh flowers sits atop a mahogany side table, the light from the window glinting off its glossy surface."
+"In one sentence, Describe a scene about vase.",vase,,,"a beautiful vase sits atop a wooden table, its intricate design and vibrant colors adding a touch of elegance to the room."
+"In one sentence, Describe a scene about cup.",cup,,,"a steaming cup of coffee sits on a table in a cozy cafe, the smell of freshly brewed espresso wafting through the air."
+"In one sentence, Describe a scene about handbag.",handbag,,,"a woman is walking down the street, carrying a stylish, brightly-colored handbag in one hand, and a cup of coffee in the other."
+"In one sentence, Describe a scene about hair drier.",hair drier,,,"a woman is blow-drying her long, brown hair in front of a mirror, focusing on smoothing out the ends."
+"In one sentence, Describe a scene about orange.",orange,,,"a bright orange sun is setting over a calm, blue ocean, casting a warm orange glow over the horizon."
+"In one sentence, Describe a scene about motorcycle.",motorcycle,,,"a man is speeding down a winding road on his motorcycle, the wind blowing in his face and the sun setting in the distance."
+"In one sentence, Describe a scene about toaster.",toaster,,,"a shiny, silver toaster sits on a kitchen counter, ready to pop out freshly-toasted bread."
+"In one sentence, Describe a scene about sink.",sink,,,"a kitchen sink is filled with dirty dishes and steam is rising from the warm, soapy water."
+"In one sentence, Describe a scene about bird.",bird,,,"a bright blue sky filled with chirping birds perched atop a tree, singing joyfully in the warm morning sun."
+"In one sentence, Describe a scene about traffic light.",traffic light,,,"cars slowly roll through an intersection, stopping and starting as the traffic light changes from green to yellow to red."
+"In one sentence, Describe a scene about surfboard.",surfboard,,,"a surfer is riding a blue and white striped surfboard in the bright blue ocean, the sun shining down on them."
+"In one sentence, Describe a scene about person.",person,,,"a person is standing in a sunny meadow, enjoying the peacefulness and beauty of the surrounding nature."
+"In one sentence, Describe a scene about wine glass.",wine glass,,,"a crystal-clear wine glass filled with a deep red liquid sits atop a white tablecloth, reflecting the warm light of the setting sun."
+"In one sentence, Describe a scene about dining table.",dining table,,,"a family of five sits around a large wooden dining table, laughing and enjoying a home cooked meal."
+"In one sentence, Describe a scene about baseball glove.",baseball glove,,,"a young boy is running around the backyard, swinging his baseball glove in the air and laughing joyfully."
+"In one sentence, Describe a scene about baseball glove.",baseball glove,,,"a young boy is sitting in the grass, smiling as he throws a baseball back and forth with his dad, his worn-in baseball glove catching each pitch with ease."
+"In one sentence, Describe a scene about truck.",truck,,,"a big, red truck is driving down a winding country road, its engine rumbling in the quiet of the countryside."
+"In one sentence, Describe a scene about apple.",apple,,,"a bright, sunny day in an orchard, with red and green apples hanging from the trees and a bee buzzing around them."
+"In one sentence, Describe a scene about scissors.",scissors,,,"a pair of scissors sits on a wooden table, glinting in the light of the setting sun."
+"In one sentence, Describe a scene about donut.",donut,,,"a dozen colorful donuts are arranged in a circle on a plate, with a steaming cup of coffee in the center."
+"In one sentence, Describe a scene about teddy bear.",teddy bear,,,"a cute little teddy bear is sitting on a bed with its arms open, waiting for a hug."
+"In one sentence, Describe a scene about wine glass.",wine glass,,,"a woman sits at a table in a dimly lit restaurant, swirling a glass of red wine and admiring its deep hue."
+"In one sentence, Describe a scene about remote.",remote,,,"a person is sitting in a cozy room at home, working on their laptop while sipping a cup of tea, enjoying the freedom of remote work."
+"In one sentence, Describe a scene about skateboard.",skateboard,,,"a young boy is skateboarding through a park, doing tricks and enjoying the wind in his hair."
+"In one sentence, Describe a scene about snowboard.",snowboard,,,"a snowboarder is carving down a freshly-powdered mountain, the sun glinting off the snow as they fly through the air."
+"In one sentence, Describe a scene about skateboard.",skateboard,,,"a group of teenagers are skating around the park, doing tricks and having fun."
+"In one sentence, Describe a scene about bus.",bus,,,a crowded bus full of people talking and laughing as it drives down the street on a sunny day.
+"In one sentence, Describe a scene about fork.",fork,,,"a fork is sitting on a dinner plate at a dinner table, surrounded by a family enjoying a meal."
+"In one sentence, Describe a scene about fire hydrant.",fire hydrant,,,"a bright red fire hydrant stands in the middle of a street, water spraying from its nozzle in a powerful arc."
+"In one sentence, Describe a scene about mouse.",mouse,,,"a small mouse scurries across a kitchen floor, pausing every so often to sniff the air."
+"In one sentence, Describe a scene about remote.",remote,,,"a person sits in their home office, typing away on their laptop while video conferencing with their colleagues around the world."
+"In one sentence, Describe a scene about bicycle.",bicycle,,,"a person is riding a bicycle through a park on a sunny day, enjoying the fresh air and the sound of birds chirping."
+"In one sentence, Describe a scene about orange.",orange,,,"the sun was setting, casting a brilliant orange hue across the horizon."
+"In one sentence, Describe a scene about baseball glove.",baseball glove,,,"a young boy is standing in the middle of a sunny baseball field, his glove ready to catch a ball as he looks up to the sky."
+"In one sentence, Describe a scene about suitcase.",suitcase,,,"a woman is standing at the airport, nervously clutching a suitcase as she awaits her flight."
+"In one sentence, Describe a scene about fire hydrant.",fire hydrant,,,"a bright red fire hydrant stands tall in the middle of a street, surrounded by a pool of water from the recent rainfall."
+"In one sentence, Describe a scene about parking meter.",parking meter,,,"a person is walking down the street, putting coins into a parking meter as they go."
+"In one sentence, Describe a scene about potted plant.",potted plant,,,"a potted plant sits in the corner of the room, its lush green leaves providing a burst of color and life to the otherwise plain space."
+"In one sentence, Describe a scene about potted plant.",potted plant,,,"a potted plant sits on a windowsill, its lush green leaves cascading over the sides of the pot and brightening up the room."
+"In one sentence, Describe a scene about toaster.",toaster,,,"a toaster sits on a kitchen counter, its coils glowing orange as it prepares to toast a piece of bread."
+"In one sentence, Describe a scene about knife.",knife,,,"a person is standing in a kitchen, holding a sharp knife in their hand and preparing to cut a piece of meat."
+"In one sentence, Describe a scene about motorcycle.",motorcycle,,,"a man is riding a motorcycle down a winding country road, enjoying the wind in his hair and the sun on his face."
+"In one sentence, Describe a scene about apple and couch.",apple,couch,,a cozy living room with a red apple sitting on a comfortable brown couch.
+"In one sentence, Describe a scene about chair and pizza.",chair,pizza,,"a person is sitting in a comfortable chair, eating a slice of pizza."
+"In one sentence, Describe a scene about umbrella and bicycle.",umbrella,bicycle,,"a person is biking in the rain, holding an open umbrella in one hand and pedaling with the other."
+"In one sentence, Describe a scene about broccoli and cell phone.",broccoli,cell phone,,"a woman is sitting at a table, eating a plate of steamed broccoli while scrolling through her cell phone."
+"In one sentence, Describe a scene about train and mouse.",train,mouse,,a mouse scurries across a train station platform as a train whizzes by.
+"In one sentence, Describe a scene about baseball glove and book.",baseball glove,book,,"a boy sits on the grass in the park, throwing a baseball glove up in the air while reading a book."
+"In one sentence, Describe a scene about remote and parking meter.",remote,parking meter,,"a busy city street is lined with parked cars and remote-controlled parking meters, beeping as people rush to pay for their parking before their time runs out."
+"In one sentence, Describe a scene about bench and fork.",bench,fork,,"a lone wooden bench sits in a grassy meadow, a bright silver fork resting atop it as if someone had just finished a picnic."
+"In one sentence, Describe a scene about parking meter and knife.",parking meter,knife,,"a person is angrily pounding a knife into a parking meter, coins spilling out onto the ground."
+"In one sentence, Describe a scene about airplane and skateboard.",airplane,skateboard,,a plane flies overhead while a skateboarder does tricks in the park below.
+"In one sentence, Describe a scene about knife and broccoli.",knife,broccoli,,a chef is carefully chopping a fresh head of broccoli with a sharp knife on a wooden cutting board.
+"In one sentence, Describe a scene about motorcycle and person.",motorcycle,person,,"a person is riding a motorcycle down a winding road, the wind blowing through their hair and the sun setting in the distance."
+"In one sentence, Describe a scene about hair drier and dining table.",hair drier,dining table,,"a woman is sitting at the dining table, using a hair drier to style her hair."
+"In one sentence, Describe a scene about chair and bicycle.",chair,bicycle,,a person is sitting on a chair and pedaling a bicycle in a park.
+"In one sentence, Describe a scene about car and person.",car,person,,"a person is sitting in a car, enjoying the scenery outside the window."
+"In one sentence, Describe a scene about umbrella and scissors.",umbrella,scissors,,"a woman stands in the rain, holding an open umbrella in one hand and a pair of scissors in the other."
+"In one sentence, Describe a scene about cow and hair drier.",cow,hair drier,,a cow is standing in a barn while a hairdresser blow-dries its fur with a hairdryer.
+"In one sentence, Describe a scene about donut and wine glass.",donut,wine glass,,"a cozy evening in, with a glass of red wine and a freshly-made donut on the side."
+"In one sentence, Describe a scene about cake and fork.",cake,fork,,"a fork is delicately cutting into a freshly-baked cake, releasing a mouth-watering aroma."
+"In one sentence, Describe a scene about horse and book.",horse,book,,"a horse is standing in a field of grass, its nose buried in an open book sitting atop a nearby fence."
+"In one sentence, Describe a scene about bowl and fork.",bowl,fork,,"a bowl of steaming hot food sits on the table, a fork beside it, ready to be used."
+"In one sentence, Describe a scene about airplane and potted plant.",airplane,potted plant,,"a potted plant sits in the aisle of an airplane, giving a hint of nature to the otherwise sterile environment."
+"In one sentence, Describe a scene about dining table and sports ball.",dining table,sports ball,,"a family is gathered around a dining table, eating dinner while a sports ball is bouncing around the room."
+"In one sentence, Describe a scene about cake and baseball glove.",cake,baseball glove,,"a child excitedly digs into a delicious chocolate cake with a baseball glove-shaped cookie cutter, their eyes twinkling with delight."
+"In one sentence, Describe a scene about snowboard and tv.",snowboard,tv,,a group of friends are snowboarding down a mountain while watching their favorite show on a portable tv.
+"In one sentence, Describe a scene about sandwich and keyboard.",sandwich,keyboard,,"a person is sitting at a desk, typing away on a keyboard while eating a sandwich."
+"In one sentence, Describe a scene about boat and scissors.",boat,scissors,,a boat is floating in the water while a pair of scissors hangs from its side.
+"In one sentence, Describe a scene about bus and tennis racket.",bus,tennis racket,,"a person is standing at a bus stop, holding a tennis racket and waiting for the bus to arrive."
+"In one sentence, Describe a scene about sheep and baseball bat.",sheep,baseball bat,,"a farmer stands in a field of sheep, holding a baseball bat in one hand and a bucket of feed in the other."
+"In one sentence, Describe a scene about surfboard and refrigerator.",surfboard,refrigerator,,a sun-soaked beach with a surfer waxing their surfboard next to a beach-themed refrigerator filled with cold drinks.
+"In one sentence, Describe a scene about tv and cup.",tv,cup,,a person is sitting on the couch watching tv while sipping from a cup of hot tea.
+"In one sentence, Describe a scene about cake and train.",cake,train,,"a train slowly passes by a bakery window, revealing a tantalizing display of freshly-baked cakes inside."
+"In one sentence, Describe a scene about tie and surfboard.",tie,surfboard,,"a surfer is standing on the beach with a surfboard under one arm and a brightly-colored tie around his neck, ready to hit the waves."
+"In one sentence, Describe a scene about bird and skateboard.",bird,skateboard,,"a bird is perched atop a skateboard, watching a skateboarder do tricks in a skatepark."
+"In one sentence, Describe a scene about toothbrush and horse.",toothbrush,horse,,a horse is standing in a bathroom brushing its teeth with a toothbrush.
+"In one sentence, Describe a scene about bowl and truck.",bowl,truck,,"a truck is driving down a winding road, passing fields of tall grass and a pond where a family of ducks is swimming in a circle around a bright blue bowl."
+"In one sentence, Describe a scene about remote and orange.",remote,orange,,"a remote sits on an orange cushion in a cozy living room, surrounded by the warm glow of the fire in the fireplace."
+"In one sentence, Describe a scene about toilet and skateboard.",toilet,skateboard,,"a teenage boy is skating in a public restroom, grinding on the toilet bowl and performing tricks on the skateboard."
+"In one sentence, Describe a scene about baseball bat and bowl.",baseball bat,bowl,,"a boy is standing in a grassy field, swinging a baseball bat at a bowling ball, trying to hit it as far as he can."
+"In one sentence, Describe a scene about banana and baseball bat.",banana,baseball bat,,a baseball player is eating a banana while holding a baseball bat.
+"In one sentence, Describe a scene about clock and bottle.",clock,bottle,,"a grandfather clock stands tall in the corner of a room, ticking away the seconds as a bottle of wine sits on the table nearby, its cork slowly being pulled out."
+"In one sentence, Describe a scene about skateboard and bicycle.",skateboard,bicycle,,"a group of skateboarders and bicyclists are riding around a park, performing tricks and enjoying the sunny day."
+"In one sentence, Describe a scene about cell phone and bicycle.",cell phone,bicycle,,a busy street corner with people talking on their cell phones while riding their bicycles.
+"In one sentence, Describe a scene about fork and horse.",fork,horse,,"a fork is stuck in a pile of hay in a stable, with a horse lazily munching on the hay around it."
+"In one sentence, Describe a scene about laptop and motorcycle.",laptop,motorcycle,,"a person is sitting on a motorcycle, typing away on a laptop while enjoying the scenery."
+"In one sentence, Describe a scene about bench and stop sign.",bench,stop sign,,"a bench sits in front of a stop sign, surrounded by a peaceful park."
+"In one sentence, Describe a scene about snowboard and sheep.",snowboard,sheep,,"a snowboarder is carving down a snowy hill, while a flock of sheep graze peacefully nearby."
+"In one sentence, Describe a scene about tv and sheep.",tv,sheep,,"a flock of sheep are gathered around a television in a meadow, watching a cartoon."
+"In one sentence, Describe a scene about hot dog and cake.",hot dog,cake,,"a picnic in the park with hot dogs and cake, enjoyed by friends and family in the warm summer sun."
+"In one sentence, Describe a scene about wine glass and donut.",wine glass,donut,,"a cozy cafe with a warm fire, a glass of red wine, and a freshly glazed donut on a plate, invitingly beckoning to be enjoyed."
+"In one sentence, Describe a scene about suitcase and chair.",suitcase,chair,,"a suitcase is sitting on a chair in a room, ready to be packed for a journey."
+"In one sentence, Describe a scene about umbrella and fork.",umbrella,fork,,a gust of wind blows an umbrella down the street while a fork clatters to the ground in a nearby puddle.
+"In one sentence, Describe a scene about bottle and stop sign.",bottle,stop sign,,"a bottle is rolling down the street towards a stop sign, its contents spilling out as it goes."
+"In one sentence, Describe a scene about fork and oven.",fork,oven,,a fork is being used to take a freshly-baked pie out of the oven.
+"In one sentence, Describe a scene about bottle and mouse.",bottle,mouse,,"a small mouse scurries around a glass bottle, trying to find a way out."
+"In one sentence, Describe a scene about wine glass and backpack.",wine glass,backpack,,a person sits at a cafe sipping from a glass of wine while their backpack sits on the chair next to them.
+"In one sentence, Describe a scene about handbag and train.",handbag,train,,"a woman hurriedly runs to the train station, carrying a designer handbag, while the train whistle blows in the distance."
+"In one sentence, Describe a scene about bus and wine glass.",bus,wine glass,,"a crowded bus full of people, some holding their wine glasses, is slowly making its way down the street."
+"In one sentence, Describe a scene about tennis racket and banana.",tennis racket,banana,,"a tennis racket lies on the ground next to a peeled banana, its yellow skin discarded on the court."
+"In one sentence, Describe a scene about airplane and pizza.",airplane,pizza,,the passengers on the airplane are enjoying their slices of pizza while looking out the window at the clouds.
+"In one sentence, Describe a scene about stop sign and orange.",stop sign,orange,,"a bright orange stop sign stands in the middle of a sunny street, its vivid color contrasting sharply against the blue sky."
+"In one sentence, Describe a scene about cell phone and bear.",cell phone,bear,,"a bear is curiously examining a dropped cell phone, trying to figure out how to use it."
+"In one sentence, Describe a scene about orange and bowl.",orange,bowl,,"a bright orange bowl sits on a wooden table, its vibrant hue standing out against the neutral colors of the room."
+"In one sentence, Describe a scene about cup and knife.",cup,knife,,"a cup sitting on a table next to a knife, both reflecting the light of the sun streaming in through the window."
+"In one sentence, Describe a scene about dining table and donut.",dining table,donut,,"at the dining table, a family of four sits around a plate of freshly-baked donuts, eager to enjoy them."
+"In one sentence, Describe a scene about scissors and suitcase.",scissors,suitcase,,"a woman is standing in her bedroom, packing her suitcase and carefully placing a pair of scissors inside."
+"In one sentence, Describe a scene about mouse and skis.",mouse,skis,,"a mouse is skiing down a snowy mountain, zig-zagging between the trees."
+"In one sentence, Describe a scene about carrot and cow.",carrot,cow,,a cow is happily munching on a carrot in a lush green field.
+"In one sentence, Describe a scene about umbrella and parking meter.",umbrella,parking meter,,"a woman is standing at a parking meter, struggling to open her umbrella in the pouring rain."
+"In one sentence, Describe a scene about car and kite.",car,kite,,a sunny day with a car parked in the driveway and a colorful kite soaring in the sky above.
+"In one sentence, Describe a scene about baseball glove and bowl.",baseball glove,bowl,,"a young boy sits in a sunny backyard, playing catch with a worn baseball glove and a bright red plastic bowl."
+"In one sentence, Describe a scene about traffic light and hair drier.",traffic light,hair drier,,a scene of a busy intersection with a traffic light changing from red to green while a woman under it dries her hair with a hairdryer.
+"In one sentence, Describe a scene about bear, mouse and apple.",bear,mouse,apple,"the bear, mouse and apple are all gathered around a campfire, enjoying each other's company and roasting the apple over the flames."
+"In one sentence, Describe a scene about kite, skis and bear.",kite,skis,bear,a bear is skiing down a hill while a kite is flying high in the sky above.
+"In one sentence, Describe a scene about hot dog, motorcycle and parking meter.",hot dog,motorcycle,parking meter,"a man on a motorcycle pulls up to a parking meter, takes out a hot dog from his pocket, and starts eating it while paying for parking."
+"In one sentence, Describe a scene about bear, scissors and cow.",bear,scissors,cow,"a bear, scissors and cow are standing together in a field on a sunny day, looking curiously at each other."
+"In one sentence, Describe a scene about bed, bottle and airplane.",bed,bottle,airplane,"a baby is lying in a bed, holding a bottle and watching an airplane fly by outside the window."
+"In one sentence, Describe a scene about bear, sheep and apple.",bear,sheep,apple,"the bear, sheep and apple were all gathered around a tree in the meadow, happily enjoying the day together."
+"In one sentence, Describe a scene about bus, chair and fork.",bus,chair,fork,"a bus full of people sitting in chairs, eating with forks."
+"In one sentence, Describe a scene about cell phone, umbrella and cake.",cell phone,umbrella,cake,"a person is sitting in a cafe, talking on their cell phone while holding an umbrella and eating a piece of cake."
+"In one sentence, Describe a scene about wine glass, cow and donut.",wine glass,cow,donut,"a cow stands in a field, holding a donut in its mouth, while a wine glass filled with a deep red liquid sits nearby."
+"In one sentence, Describe a scene about stop sign, microwave and refrigerator.",stop sign,microwave,refrigerator,"a stop sign sits in front of a refrigerator and microwave in a kitchen, creating a scene of safety and homely comfort."
+"In one sentence, Describe a scene about baseball glove, knife and vase.",baseball glove,knife,vase,"a baseball glove, knife, and vase are arranged in a triangle on a wooden table in a sunlit room."
+"In one sentence, Describe a scene about zebra, tv and sheep.",zebra,tv,sheep,"a flock of sheep are gathered around a tv, watching a documentary about zebras in the african savannah."
+"In one sentence, Describe a scene about bus, baseball bat and spoon.",bus,baseball bat,spoon,a bus driver is holding a baseball bat and a spoon while waiting for passengers to board.
+"In one sentence, Describe a scene about skateboard, boat and zebra.",skateboard,boat,zebra,"a skateboarder, a boat, and a zebra are all cruising down a sunny beach together."
+"In one sentence, Describe a scene about skateboard, donut and remote.",skateboard,donut,remote,"a teenage boy is skateboarding down a street, eating a donut, and using a remote to control his skateboard."
+"In one sentence, Describe a scene about cow, sports ball and bed.",cow,sports ball,bed,a cow is playing with a sports ball on a bed in a sunny field.
+"In one sentence, Describe a scene about broccoli, skis and refrigerator.",broccoli,skis,refrigerator,"a refrigerator is filled with broccoli, while two skis lean against it, ready for a winter adventure."
+"In one sentence, Describe a scene about backpack, fork and train.",backpack,fork,train,"a backpack is sitting on a train seat, with a fork sticking out of it, as the train speeds down the tracks."
+"In one sentence, Describe a scene about elephant, book and suitcase.",elephant,book,suitcase,"a giant elephant is standing in the corner of a room, holding a large, tattered book in its trunk while a small red suitcase sits nearby."
+"In one sentence, Describe a scene about apple, zebra and handbag.",apple,zebra,handbag,a zebra is eating an apple while a handbag hangs from its neck.
+"In one sentence, Describe a scene about knife, remote and potted plant.",knife,remote,potted plant,"a potted plant sits in the corner of the room, a remote control is on the nearby coffee table, and a gleaming kitchen knife is on the countertop."
+"In one sentence, Describe a scene about frisbee, laptop and bicycle.",frisbee,laptop,bicycle,a group of friends are playing frisbee in the park while one person is typing away on their laptop and another is riding around on their bicycle.
+"In one sentence, Describe a scene about donut, orange and mouse.",donut,orange,mouse,a mouse is happily nibbling on a donut while an orange rolls around in the background.
+"In one sentence, Describe a scene about knife, vase and clock.",knife,vase,clock,a knife lies on the table next to a vase filled with flowers and an old clock ticking away in the background.
+"In one sentence, Describe a scene about fork, bear and wine glass.",fork,bear,wine glass,a bear is sitting at a table with a fork in its paw and a wine glass filled with honey in front of it.
+"In one sentence, Describe a scene about banana, sink and wine glass.",banana,sink,wine glass,"a sink full of soapy water, a half-eaten banana floating in it, and a wine glass precariously perched on the edge."
+"In one sentence, Describe a scene about person, boat and bus.",person,boat,bus,"a person stands on a boat, watching a bus drive away in the distance."
+"In one sentence, Describe a scene about backpack, skis and laptop.",backpack,skis,laptop,"a person is standing in a room, wearing a backpack, carrying a laptop, and holding a pair of skis."
+"In one sentence, Describe a scene about bus, suitcase and donut.",bus,suitcase,donut,"a person is sitting on the bus with a suitcase next to them, eating a donut."
+"In one sentence, Describe a scene about apple, tennis racket and cow.",apple,tennis racket,cow,a cow is munching on an apple while a tennis racket leans against a nearby tree.
+"In one sentence, Describe a scene about cup, laptop and snowboard.",cup,laptop,snowboard,"a snowboard is propped up against a laptop on a table, with a cup of hot cocoa nearby."
+"In one sentence, Describe a scene about pizza, vase and banana.",pizza,vase,banana,"a vase filled with colorful flowers sits atop a pizza box, while a ripe banana peels nearby."
+"In one sentence, Describe a scene about apple, vase and dog.",apple,vase,dog,"the dog is happily playing with an apple in the living room, while a beautiful vase sits on the mantle."
+"In one sentence, Describe a scene about suitcase, stop sign and airplane.",suitcase,stop sign,airplane,"a traveler stands at a stop sign with a suitcase, watching an airplane take off in the distance."
+"In one sentence, Describe a scene about truck, person and toilet.",truck,person,toilet,"a person is standing next to a truck, while a toilet is being unloaded from the back of the truck."
+"In one sentence, Describe a scene about hot dog, airplane and kite.",hot dog,airplane,kite,a hot dog is being flown around in the sky by an airplane while a kite is soaring nearby.
+"In one sentence, Describe a scene about wine glass, clock and orange.",wine glass,clock,orange,"a wine glass sits on a wooden table next to a ticking clock and a bright orange, freshly peeled and ready to be enjoyed."
+"In one sentence, Describe a scene about couch, microwave and handbag.",couch,microwave,handbag,"a cozy living room with a comfortable couch, a humming microwave, and a stylish handbag resting on the arm of the couch."
+"In one sentence, Describe a scene about keyboard, book and car.",keyboard,book,car,a person is typing on a keyboard while reading a book in a car that is parked in a quiet park.
+"In one sentence, Describe a scene about umbrella, oven and bowl.",umbrella,oven,bowl,a scene of a rainy day with an open umbrella hanging above a warm oven with a bowl of steaming soup sitting on the counter.
+"In one sentence, Describe a scene about skateboard, kite and traffic light.",skateboard,kite,traffic light,"a skateboarder, a kite-flyer, and a traffic light all coexist in a busy intersection, creating a vibrant and chaotic scene."
+"In one sentence, Describe a scene about pizza, cow and sheep.",pizza,cow,sheep,"a scene of a farmer bringing a large, freshly-baked pizza to a pasture full of cows and sheep, who eagerly anticipate their share."
+"In one sentence, Describe a scene about knife, bicycle and banana.",knife,bicycle,banana,a person riding a bicycle with a knife in one hand and a banana in the other.
+"In one sentence, Describe a scene about surfboard, teddy bear and microwave.",surfboard,teddy bear,microwave,a teddy bear is riding a surfboard while a microwave hums in the background.
+"In one sentence, Describe a scene about bus, baseball glove and elephant.",bus,baseball glove,elephant,an elephant carrying a baseball glove is waiting for a bus in a busy city street.
+"In one sentence, Describe a scene about baseball bat, mouse and chair.",baseball bat,mouse,chair,"the mouse perched atop the chair, nervously eyeing the baseball bat on the floor below."
+"In one sentence, Describe a scene about pizza, bench and dog.",pizza,bench,dog,"a dog is happily sitting on a bench, licking its lips after devouring a slice of delicious pizza."
+"In one sentence, Describe a scene about fire hydrant, bear and giraffe.",fire hydrant,bear,giraffe,"a bear, a giraffe, and a fire hydrant stand together in a park on a sunny day, the bear curiously looking up at the giraffe."
+"In one sentence, Describe a scene about cake, donut and cow.",cake,donut,cow,"a cow is happily munching on a donut while a slice of cake sits nearby, waiting to be devoured."
+"In one sentence, Describe a scene about carrot, cell phone and suitcase.",carrot,cell phone,suitcase,a person is packing a suitcase full of carrots while talking on their cell phone.
+"In one sentence, Describe a scene about train, mouse and potted plant.",train,mouse,potted plant,"a mouse scurries across a train station platform, pausing to nibble on a potted plant before continuing on its journey."
+"In one sentence, Describe a scene about knife, motorcycle and traffic light.",knife,motorcycle,traffic light,"a motorcyclist speeds through an intersection, narrowly avoiding a red traffic light as a knife flies through the air."
+"In one sentence, Describe a scene about bus, chair and bird.",bus,chair,bird,a bus drives by a park bench with a bird perched on the back of a chair.
+"In one sentence, Describe a scene about bottle, cup and orange.",bottle,cup,orange,"a bright orange sits atop a clear glass bottle and a white ceramic cup, creating a cheerful and inviting scene."
+"In one sentence, Describe a scene about person, sandwich and handbag.",person,sandwich,handbag,"a person is sitting at a cafe, eating a sandwich while holding a handbag."
+"In one sentence, Describe a scene about remote, sheep and donut.",remote,sheep,donut,"a remote meadow filled with sheep grazing peacefully, with a single donut in the middle of the field, waiting to be discovered."
+"In one sentence, Describe a scene about zebra, chair and hair drier.",zebra,chair,hair drier,"a zebra is sitting in a chair in front of a mirror, getting its mane styled with a hair drier."
+"In one sentence, Describe a scene about dog, frisbee and parking meter.",dog,frisbee,parking meter,"a small black dog is running around a parking lot, chasing a bright red frisbee while its owner is trying to feed coins into a parking meter."
+"In one sentence, Describe a scene about truck, refrigerator and bed.",truck,refrigerator,bed,"a truck is parked in front of a house, with a refrigerator and bed loaded in the back."
+"In one sentence, Describe a scene about wine glass, skis and giraffe.",wine glass,skis,giraffe,"a giraffe is skiing down a mountain with a wine glass in its mouth, gliding over the freshly fallen snow."
+"In one sentence, Describe a scene about cow, wine glass and scissors.",cow,wine glass,scissors,"a cow is standing in a grassy field, a wine glass sits nearby, and a pair of scissors is lying in the grass."
+"In one sentence, Describe a scene about snowboard, apple and toilet.",snowboard,apple,toilet,a snowboarder is eating an apple while sitting on a toilet in the middle of a snowy mountain.
+"In one sentence, Describe a scene about bicycle, carrot and dining table.",bicycle,carrot,dining table,a bicycle is parked next to a dining table covered with a basket of carrots.
+"In one sentence, Describe a scene about frisbee, donut and baseball bat.",frisbee,donut,baseball bat,a group of friends are playing frisbee in the park while enjoying donuts and batting a baseball bat around.
+"In one sentence, Describe a scene about teddy bear, person and oven.",teddy bear,person,oven,a person is cuddling a teddy bear while baking a cake in an oven.
+"In one sentence, Describe a scene about elephant, bottle and hair drier.",elephant,bottle,hair drier,"an elephant is standing in a bathroom, holding a bottle of shampoo in its trunk while a hair drier is blowing warm air onto its back."
+"In one sentence, Describe a scene about zebra, teddy bear and laptop.",zebra,teddy bear,laptop,"a zebra is sitting on a teddy bear with a laptop in front of them, looking intently at the screen."
+"In one sentence, Describe a scene about handbag, sports ball and tv.",handbag,sports ball,tv,"a woman is sitting on the couch watching tv, with a handbag next to her and a sports ball at her feet."
+"In one sentence, Describe a scene about tv, traffic light and clock.",tv,traffic light,clock,"a busy street corner with a traffic light changing colors, a clock ticking, and a tv playing in the background."
+"In one sentence, Describe a scene about bed, fork and sink.",bed,fork,sink,"a bedroom with a bed in the corner, a fork on the bedside table, and a sink in the opposite corner."
+"In one sentence, Describe a scene about banana, traffic light and kite.",banana,traffic light,kite,"a child is standing on the sidewalk, eating a banana while watching a kite soar in the sky and waiting for the traffic light to turn green."
+"In one sentence, Describe a scene about bowl, elephant and car.",bowl,elephant,car,an elephant is balancing a bowl on its trunk while a car drives by in the background.

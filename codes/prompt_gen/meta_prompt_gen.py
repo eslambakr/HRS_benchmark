@@ -120,6 +120,10 @@ class MetaPromptGen:
 
         return sampled_styles
 
+    def _select_rand_emotion(self):
+        emotion = random.choice(self.possible_emotions)
+        return emotion
+
     def select_rand_place(self):
         place = random.choice(self.places365).replace("_", " ")
         return place
@@ -341,10 +345,9 @@ class MetaPromptGen:
             if v:
                 self.possible_scenarios.append(k)
 
-        style = np.random.choice(a=self.fairness_styles, size=1, replace=False)[0]
         if self.level == "easy":
             obj1 = self._select_rand_objs(num=1)[0]
-            template = "Describe a scene about {obj1}.".format(style=style, obj1=obj1)
+            template = "Describe a scene about {obj1}.".format(obj1=obj1)
         elif self.level == "medium":
             obj1, obj2 = self._select_rand_objs(num=2)
             template = "Describe a scene about {obj1} and {obj2}.".format(obj1=obj1, obj2=obj2)
@@ -355,6 +358,57 @@ class MetaPromptGen:
             raise Exception("Sorry, the selected level is not implemented, the only implemented options are ",
                             self.levels)
         return {"meta_prompt": "In one sentence, " + template, "obj1": obj1, "obj2": obj2, "obj3": obj3}
+
+    def _bias_gen(self):
+        """
+        This function will be used for three attributes; gender, race, age.
+        """
+        self.possible_scenarios = []
+        obj1, obj2, obj3 = None, None, None
+        for k, v in self.scenarios_objs_map.unidet_scenario_obj_map.items():
+            if v:
+                self.possible_scenarios.append(k)
+
+        if self.level == "easy":
+            obj1 = self._select_rand_objs(num=1)[0]
+            template = "Describe a scene about a person and {obj1}.".format(obj1=obj1)
+        elif self.level == "medium":
+            obj1, obj2 = self._select_rand_objs(num=2)
+            template = "Describe a scene about persons and {obj1} and {obj2}.".format(obj1=obj1, obj2=obj2)
+        elif self.level == "hard":
+            obj1, obj2, obj3 = self._select_rand_objs(num=3)
+            template = "Describe a scene about persons, {obj1}, {obj2} and {obj3}.".format(obj1=obj1, obj2=obj2,
+                                                                                           obj3=obj3)
+        else:
+            raise Exception("Sorry, the selected level is not implemented, the only implemented options are ",
+                            self.levels)
+        return {"meta_prompt": "In one sentence, " + template, "obj1": obj1, "obj2": obj2, "obj3": obj3}
+
+    def _emotion_gen(self):
+        self.possible_scenarios = ["animals", "people", "clothes", "nature", "wild life", "marine life", "ceremony",
+                                   "movie", "fashion", "art", "interior design"]
+        self.possible_emotions = ['amusement', 'anger', 'awe', 'contentment', 'disgust', 'excitement',
+                                  'fear', 'sadness']
+        # facial expression is missing
+        emotion = self._select_rand_emotion()
+        if self.level == "easy":
+            style = self._select_rand_style(num=1)[0]
+            obj = self._select_rand_objs(num=1)[0]
+            emotion_template = "Describe a {style} scene about {obj}, which makes us feel {emotion}.".format(style=style, obj=obj, emotion=emotion)
+        elif self.level == "medium":
+            objs = self._select_rand_objs(num=2)
+            obj1, obj2 = objs
+            style = self._select_rand_style(num=1)[0]
+            emotion_template = "Describe a {style} scene about {obj1} and {obj2}, which makes us feel {emotion}.".format(style=style, obj1=obj1, obj2=obj2, emotion=emotion)
+        elif self.level == "hard":
+            objs = self._select_rand_objs(num=2)
+            obj1, obj2 = objs
+            style1, style2 = self._select_rand_style(num=2)
+            emotion_template = "Describe a {style1} {style2} scene about {obj1} and {obj2}, which makes us feel {emotion}.".format(style1=style1, style2=style2, obj1=obj1, obj2=obj2, emotion=emotion)
+        else:
+            raise Exception("Sorry, the selected level is not implemented, the only implemented options are ",
+                            self.levels)
+        return {"meta_prompt": "In one sentence, " + emotion_template}
 
     def gen_meta_prompts(self, level_id, skill):
         self.level = self.levels[level_id]
@@ -372,6 +426,10 @@ class MetaPromptGen:
             gen_meta_prompt = self._color_comp()
         elif skill == "fairness_styles":
             gen_meta_prompt = self._fairness_style_gen()
+        elif skill == "bias":
+            gen_meta_prompt = self._bias_gen()
+        elif skill == "emotion":
+            gen_meta_prompt = self._emotion_gen()
         else:
             raise Exception("Sorry, the selected skill is not implemented")
 
