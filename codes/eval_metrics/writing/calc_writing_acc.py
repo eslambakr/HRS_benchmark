@@ -2,6 +2,7 @@ import pandas as pd
 import csv
 import json
 import pickle
+import sys
 from tqdm import tqdm
 from nltk import edit_distance
 import fastwer
@@ -60,12 +61,14 @@ def cal_acc(gt_txt, pred_txt):
 
 if __name__ == "__main__":
     # Load GT:
-    gt_txt = load_gt(csv_pth='../../prompt_gen/synthetic_writing_prompts.csv')
-    iter_num = 5
+    gt_csv_pth = sys.argv[1]  # '../../prompt_gen/writing_prompts/synthetic_writing_prompts.csv'
+    pred_pkl_pth = sys.argv[2]  # 'mmocr_pred_dalle_v2_writing.pkl'
+    iter_num = int(sys.argv[3])  # e.g., 3
+    gt_txt = load_gt(csv_pth=gt_csv_pth)
     ned, cer, wer = [], [], []
     for iter_idx in range(iter_num):
         # Load Predictions:
-        pred_txt = load_pred(pkl_pth='mmocr_pred_writing.pkl', iter_idx=iter_idx)
+        pred_txt = load_pred(pkl_pth=pred_pkl_pth, iter_idx=iter_idx)
         # Calculate the counting Accuracy:
         writing_acc = cal_acc(gt_txt, pred_txt)
         ned.append(writing_acc[0])
