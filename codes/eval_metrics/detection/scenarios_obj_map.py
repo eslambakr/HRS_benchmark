@@ -317,13 +317,13 @@ class ScenariosObjsMapping:
         pct = '%1.0f%%'
         colors = sns.color_palette('pastel')[0:len(data)]
 
-        plt.figure(figsize=(12, 9), dpi=100)
+        plt.figure(figsize=(10, 9), dpi=300)
         plt.pie(data, labels=labels, explode=exp, colors=colors, pctdistance=0.8,
                 autopct=pct, startangle=0, rotatelabels=True, normalize=True, shadow=False)
         # plt.title("Objects distribution across scenarios")
 
         # plt.pie(data, labels=labels, colors=colors, autopct='%.0f%%')
-        plt.savefig('visualize_scenario_objs_pie.png')
+        plt.savefig('visualize_scenario_objs_pie.png', bbox_inches='tight')
 
 
 if __name__ == "__main__":
