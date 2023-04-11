@@ -63,11 +63,19 @@ and [Mohamed Elhoseiny](https://scholar.google.com/citations?user=iRBUTOAAAAAJ&h
 
 
 ## :pushpin: Data
-### :point_right: HRS-Bench
+### :point_right: HRS-Bench:
 * First, download our prompts that covers the 13 skills from [here](https://drive.google.com/drive/folders/1AlA259sXi-3ZJD7RFaL2bGDwJXLImJrx).
 * Each skill has its own CSV file that contains the prompt and the GT that will be used during the evaluation phase. 
+### :point_right: Prompt Generation:
+You don't need to run the prompts generation codes as we already provide the generated prompts and can be downloaded from this [link](https://drive.google.com/drive/folders/1AlA259sXi-3ZJD7RFaL2bGDwJXLImJrx).
+
+However, we provide also all the 
+[generation codes](https://github.com/eslambakr/T2I_benchmark/codes/prompt_gen/README.md).
 
 ## :pushpin: Evaluation
+Follow the detailed instructions mentioned in the
+[README file](https://github.com/eslambakr/T2I_benchmark/codes/eval_metrics/README.md).
+to be able to run all our eval scripts for the whole skills.
 
 
 ## :bouquet: Credits
