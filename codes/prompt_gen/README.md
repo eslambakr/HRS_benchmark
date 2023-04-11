@@ -22,7 +22,7 @@ with torch.no_grad():
 
 
 ## Rest of skills:
-Run our [prompt generation file](https://github.com/eslambakr/T2I_benchmark/codes/prompt_gen/chatGPT_inference.py) 
+Run our [prompt generation file](https://github.com/eslambakr/T2I_benchmark/blob/main/codes/prompt_gen/chatGPT_inference.py) 
 with the desired arguments:
 ```
 1) Your openai.api_key

@@ -10,7 +10,7 @@ First, download the [UniDet](https://github.com/xingyizhou/UniDet)'s
 and [configurations](https://github.com/xingyizhou/UniDet/blob/master/configs/Partitioned_COI_RS101_2x.yaml).
 
 Then, run the 
-[inference code](https://github.com/eslambakr/T2I_benchmark/codes/eval_metrics/detection/UniDet-master/demo.py)
+[inference code](https://github.com/eslambakr/T2I_benchmark/blob/main/codes/eval_metrics/detection/UniDet-master/demo.py)
 to generate the bounding boxes and save them as follows:
 ```python
 python demo.py --config-file configs/Partitioned_COI_RS101_2x.yaml \
@@ -19,7 +19,7 @@ python demo.py --config-file configs/Partitioned_COI_RS101_2x.yaml \
 ```
 
 Finally, run the 
-[calc_counting_acc.py](https://github.com/eslambakr/T2I_benchmark/codes/eval_metrics/counting/calc_counting_acc.py)
+[calc_counting_acc.py](https://github.com/eslambakr/T2I_benchmark/blob/main/codes/eval_metrics/counting/calc_counting_acc.py)
 to calculate the counting accuracy, as follows:
 ```python
 python calc_counting_acc.py [Input pkl path] [GT-csv] [Number of Iteration]
@@ -39,7 +39,7 @@ for text detection and
 [mmocr](https://github.com/open-mmlab/mmocr) framework.
 
 First, run the 
-[inference code](https://github.com/eslambakr/T2I_benchmark/codes/eval_metrics/writing/mmocr/inference.py)
+[inference code](https://github.com/eslambakr/T2I_benchmark/blob/main/codes/eval_metrics/writing/mmocr/inference.py)
 to detect and recognize the text in the scene and save them as follows:
 ```python
 python inference.py [Input Images Directory] [Output Images Directory] [Recognation Thershold] [Saving pkl Name]
@@ -51,7 +51,7 @@ python inference.py "../../data/t2i_out/dalle_v2/writing/" "../../data/metrics/w
 ```
 
 Then, run the 
-[calc_writing_acc.py](https://github.com/eslambakr/T2I_benchmark/codes/eval_metrics/writing/calc_writing_acc.py)
+[calc_writing_acc.py](https://github.com/eslambakr/T2I_benchmark/blob/main/codes/eval_metrics/writing/calc_writing_acc.py)
 to calculate the visual-text accuracy, as follows:
 ```python
 python calc_writing_acc.py [GT-csv] [Input pkl path] [Number of Iteration]
@@ -77,7 +77,7 @@ for calculating BLEU and CIDEr scores.
 
 **Data** -->
 All data used for evaluation is provided in the 
-[benchmark_data directory](https://github.com/eslambakr/T2I_benchmark/data/metrics/emotion).
+[benchmark_data directory](https://github.com/eslambakr/T2I_benchmark/blob/main/data/metrics/emotion).
 The following files are available:
 - [skill]_[model_name].json: this file saves all generated captions using the specified model.
 - [skill]_[model_name]_cider.json: this file saves all CIDEr scores for each sample.
@@ -130,7 +130,7 @@ First, download the [UniDet](https://github.com/xingyizhou/UniDet)'s
 and [configurations](https://github.com/xingyizhou/UniDet/blob/master/configs/Partitioned_COI_RS101_2x.yaml).
 
 Then, run the 
-[inference code](https://github.com/eslambakr/T2I_benchmark/codes/eval_metrics/detection/UniDet-master/demo.py)
+[inference code](https://github.com/eslambakr/T2I_benchmark/blob/main/codes/eval_metrics/detection/UniDet-master/demo.py)
 to generate the bounding boxes and save them as follows:
 ```python
 python demo.py --config-file configs/Partitioned_COI_RS101_2x.yaml \
@@ -139,7 +139,7 @@ python demo.py --config-file configs/Partitioned_COI_RS101_2x.yaml \
 ```
 
 Finally, run the 
-[calc_spatial_relation_acc.py](https://github.com/eslambakr/T2I_benchmark/codes/eval_metrics/compositions/calc_spatial_relation_acc.py)
+[calc_spatial_relation_acc.py](https://github.com/eslambakr/T2I_benchmark/blob/main/codes/eval_metrics/compositions/calc_spatial_relation_acc.py)
 to calculate the spatial composition accuracy, as follows:
 ```python
 python calc_spatial_relation_acc.py [Input pkl path] [GT-csv] [Number of Iteration]
@@ -151,7 +151,7 @@ First, download the [UniDet](https://github.com/xingyizhou/UniDet)'s
 and [configurations](https://github.com/xingyizhou/UniDet/blob/master/configs/Partitioned_COI_RS101_2x.yaml).
 
 Then, run the 
-[inference code](https://github.com/eslambakr/T2I_benchmark/codes/eval_metrics/detection/UniDet-master/demo.py)
+[inference code](https://github.com/eslambakr/T2I_benchmark/blob/main/codes/eval_metrics/detection/UniDet-master/demo.py)
 to generate the bounding boxes and save them as follows:
 ```python
 python demo.py --config-file configs/Partitioned_COI_RS101_2x.yaml \
@@ -160,7 +160,7 @@ python demo.py --config-file configs/Partitioned_COI_RS101_2x.yaml \
 ```
 
 Finally, run the 
-[calc_size_comp_acc.py](https://github.com/eslambakr/T2I_benchmark/codes/eval_metrics/compositions/calc_size_comp_acc.py)
+[calc_size_comp_acc.py](https://github.com/eslambakr/T2I_benchmark/blob/main/codes/eval_metrics/compositions/calc_size_comp_acc.py)
 to calculate the size composition accuracy, as follows:
 ```python
 python calc_size_comp_acc.py [Input pkl path] [GT-csv] [Number of Iteration]
