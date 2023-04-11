@@ -1,5 +1,13 @@
 """
-"../../prompt_gen/synthetic_writing_prompts.txt" "../../../data/t2i_out/dalle_v1/writing" 5
+"../../prompt_gen/emotion_skill/meta_emotion_prompts.txt"
+"../../../data/t2i_out/dalle_v2/emotion_skill"
+3
+"Bearer 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"
+
+"../../prompt_gen/misspelling_prompts/spell_1.txt"
+"../../../data/t2i_out/dalle_v2/spell_1"
+3
+"Bearer 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"
 """
 import requests
 import json
@@ -39,6 +47,7 @@ output_dir = sys.argv[2]
 n_iter = sys.argv[3]
 openai_key = sys.argv[4]
 
+total_num_img = 0
 # Define the API endpoint URL
 api_url = "https://api.openai.com/v1/images/generations"
 # Set up the API authentication headers
@@ -48,10 +57,10 @@ prompts = read_prompts_from_txt(prompt_file)
 if not (os.path.exists(output_dir)):
     os.makedirs(output_dir)
 
-# Create the text tokens to feed to the model. 446, 600, 2321, 2327, 2904
-start_id = 2812
-total_num_img = 0
-for idx in tqdm(range(start_id, len(prompts))):
+# Create the text tokens to feed to the model.
+#
+start_id = 0
+for idx in tqdm(range(start_id, len(prompts))):  # len(prompts)
     # Handle the case where we wanna resume the generation.
     prompt = prompts[idx]
     for n in range(int(n_iter)):
