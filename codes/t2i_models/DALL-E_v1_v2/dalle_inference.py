@@ -2,12 +2,12 @@
 "../../prompt_gen/emotion_skill/meta_emotion_prompts.txt"
 "../../../data/t2i_out/dalle_v2/emotion_skill"
 3
-"Bearer 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"
+"Bearer sk-xx"
 
 "../../prompt_gen/misspelling_prompts/spell_1.txt"
 "../../../data/t2i_out/dalle_v2/spell_1"
 3
-"Bearer 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"
+"Bearer sk-xx"
 """
 import requests
 import json
