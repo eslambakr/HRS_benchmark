@@ -16,7 +16,6 @@ and [Mohamed Elhoseiny](https://scholar.google.com/citations?user=iRBUTOAAAAAJ&h
 
 ## :loudspeaker: News
 * **(April 11, 2023):** The paper is published on arxiv.
-* **(March 8, 2023):** HRS-Bench is submitted to ICCV 2023.
 
 ## :books: Synopsis
 
