@@ -11,10 +11,11 @@ This is the official implementation for our paper
 and [Mohamed Elhoseiny](https://scholar.google.com/citations?user=iRBUTOAAAAAJ&hl=en)
 
 :satellite: [![Website](https://img.shields.io/badge/Project-Website-87CEEB)](https://eslambakr.github.io/hrsbench.github.io/) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-:book: [![paper](https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg)](https://hrsbench.github.io/index.html) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+:book: [![paper](https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg)](https://arxiv.org/abs/2304.05390) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 :clapper: [![video](https://img.shields.io/badge/Video-Presentation-F9D371)](https://hrsbench.github.io/index.html)
 
 ## :loudspeaker: News
+* **(April 11, 2023):** The paper is published on arxiv.
 * **(March 8, 2023):** HRS-Bench is submitted to ICCV 2023.
 
 ## :books: Synopsis
@@ -90,5 +91,10 @@ eslam.abdelrahman@kaust.edu.sa
 
 Please consider citing our paper if you find it useful.
 ```
-
+@misc{2304.05390,
+Author = {Eslam Mohamed Bakr and Pengzhan Sun and Xiaoqian Shen and Faizan Farooq Khan and Li Erran Li and Mohamed Elhoseiny},
+Title = {HRS-Bench: Holistic, Reliable and Scalable Benchmark for Text-to-Image Models},
+Year = {2023},
+Eprint = {arXiv:2304.05390},
+}
 ```
