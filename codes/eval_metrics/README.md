@@ -166,6 +166,36 @@ to calculate the size composition accuracy, as follows:
 python calc_size_comp_acc.py [Input pkl path] [GT-csv] [Number of Iteration]
 ```
 
+### Color Composition:
+We adopt [MaskDINO](https://arxiv.org/pdf/2206.02777.pdf) [CVPr 2023] for the instance segmentation.
+
+First, run the 
+[inference code](https://github.com/eslambakr/T2I_benchmark/blob/main/codes/eval_metrics/colors/MaskDINO/demo/demo.py)
+to predict the masks for each instance and save them as follows:
+```python
+python demo.py [Config File] [Input Images Directory] [Output Images Directory] [Model Weights]
+```
+
+For instance:
+```
+python demo.py --config-file 'T2I_benchmark/codes/eval_metrics/colors/MaskDINO/configs/coco/instance-segmentation/swin/maskdino_R50_bs16_50ep_4s_dowsample1_2048.yaml' \
+--input 't2i_benchmark/data/t2i_out/sd_v1/colors/*.png' \
+--output T2I_benchmark/data/colors/output/sd_v1/ \
+--opts MODEL.WEIGHTS T2I_benchmark/weights/mask_dino/maskdino_swinl_50ep_300q_hid2048_3sd1_instance_maskenhanced_mask52.3ap_box59.pth
+```
+
+Then, run the 
+[hue_based_color_classifier.py](https://github.com/eslambakr/T2I_benchmark/blob/main/codes/eval_metrics/colors/hue_based_color_classifier.py)
+to calculate the color composition accuracy, as follows:
+```python
+python hue_based_color_classifier.py [Generated Masks Directory] [GT-csv] [T2I Model Output Directory]
+```
+
+For instance:
+```
+python hue_based_color_classifier.py  'T2I_benchmark/data/colors/output/sd_v1' 'T2I_benchmark/data/colors/colors_composition_prompts.csv' 't2i_benchmark/data/t2i_out/sd_v1/colors'
+```
+
 ## :pushpin: Fairness
 We will publish the eval script soon, please stay tuned.
 
