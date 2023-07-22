@@ -1,5 +1,5 @@
 # HRS-Bench: Holistic, Reliable and Scalable Benchmark for Text-to-Image Models
-This is the official implementation for our paper
+This is the official implementation for our ICCV-2023 paper
 
 [**"HRS-Bench: Holistic, Reliable and Scalable Benchmark for Text-to-Image Models"**](https://hrsbench.github.io/)
 
@@ -15,6 +15,7 @@ and [Mohamed Elhoseiny](https://scholar.google.com/citations?user=iRBUTOAAAAAJ&h
 :clapper: [![video](https://img.shields.io/badge/Video-Presentation-F9D371)](https://hrsbench.github.io/index.html)
 
 ## :loudspeaker: News
+* **(July 13, 2023):** The paper is accepted at ICCV-2023.
 * **(April 11, 2023):** The paper is published on arxiv.
 
 ## :books: Synopsis
